@@ -1,17 +1,162 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<h1 id="h1">Contact Us</h1>
+@*<div class="col-lg-6"><img id="Img" src="~/Content/Image/Contact.png" /></div>*@
+<div class="contact-form col-lg-6">
+    <center>
+        <form action="index.html" autocomplete="off">
+            <h2 class="title">CONTACT US</h2>
+            <div class="input-container">
+                <input type="text" name="name" class="input" placeholder="User Name" />
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
+            </div>
+            <div class="input-container">
+                <input type="email" name="email" class="input" placeholder="Email ID" />
+
+
+            </div>
+            <div class="input-container">
+                <input type="tel" name="phone" class="input" placeholder="Mobile Number" />
+
+
+            </div>
+            <div class="input-container textarea">
+                <textarea name="message" class="input" placeholder="Message"></textarea>
+
+            </div>
+            <input type="reset" onclick="Send()" value="Send" class="btn btn-success" id="btnc" />
+        </form>
+    </center>
+</div>
+
+<script>
+    function Send() {
+        onreset(alert("Submited Successfully"))
+    }
+</script>
+<style>
+ 
+
+    h2 {
+        font-family: 'Bookman Old Style';
+    }
+
+    #Img {
+        width: 150px;
+        height: 500px;
+        margin-top: 100px;
+        margin-left: 200px;
+        display: inline-block;
+        float: left;
+    }
+
+    .contact-form {
+        background-color:black;
+        padding: 50px;
+        border-radius: 100px;
+        width: 500px;
+        display: inline-block;
+        float: right;
+        /* border:2px solid black;*/
+    }
+
+    textarea {
+        font-family: "Poppins", sans-serif;
+    }
+
+    .input-container {
+        position: relative;
+        margin: 1rem 0;
+    }
+
+    .input {
+        width: 100%;
+        outline: none;
+        border: 2px solid #fafafa;
+        background-color: white;
+        color: black;
+        padding: 0.6rem 1.2rem;
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+        border-radius: 25px;
+        transition: 0.3s;
+        /* border-bottom-color: black;
+    border-right-color: blue;
+    border-top-color: red;
+    border-left-color: seagreen;*/
+    }
+
+    textarea.input {
+        padding: 0.8rem 1.2rem;
+        min-height: 150px;
+        border-radius: 22px;
+        resize: none;
+        overflow-y: auto;
+        /*  border-bottom-color:black;*/
+    }
+
+    input::placeholder {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        padding: 0 0.4rem;
+        color: black;
+        font-size: 12px;
+        font-weight: 400;
+        pointer-events: none;
+        z-index: 1000;
+        transition: 0.5s;
+    }
+
+    textarea::placeholder {
+        position: absolute;
+        left: 15px;
+        transform: translateY(-50%);
+        padding: 0 0.4rem;
+        color: black;
+        font-size: 12px;
+        font-weight: 400;
+        pointer-events: none;
+        margin-top: 10px;
+        transition: 0.5s;
+    }
+
+    /*#btnc {
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color: violet;
+        border: 2px solid goldenrod;
+        font-size: 0.95rem;
+        color: darkblue;
+        line-height: 1;
+        border-radius: 25px;
+        outline: none;
+        cursor: pointer;
+        transition: 0.3s;
+        margin: 0;
+    }*/
+
+        /*#btnc:hover {
+            background-color: darkblue;
+            color: white;
+            border: 2px solid white;
+        }*/
+
+    .title {
+        color: #fff;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 1;
+        margin-bottom: 30px;
+    }
+
+    .input-container.textarea label {
+        top: 1rem;
+        transform: translateY(0);
+    }
+</style>

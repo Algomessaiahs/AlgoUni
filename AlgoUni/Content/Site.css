@@ -28,3 +28,11 @@ textarea {
     background-color: #777;
     border-color: #fff
 }
+.btn-primary {
+    background-color: mediumpurple;
+    border: mediumpurple;
+}
+.btn-primary:hover {
+    background-color: mediumpurple;
+    border: mediumpurple;
+}
