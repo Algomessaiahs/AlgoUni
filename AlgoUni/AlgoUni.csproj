@@ -263,6 +263,7 @@
     <Content Include="Views\CollegeDetails\Details.cshtml" />
     <Content Include="Views\CollegeDetails\Edit.cshtml" />
     <Content Include="Views\CollegeDetails\Index.cshtml" />
+    <Content Include="Views\Shared\_LoginRegisterLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

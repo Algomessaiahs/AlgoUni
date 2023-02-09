@@ -2,10 +2,21 @@
 
 @{
     ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
 }
 
-<h2>Login</h2>
+<ul class="nav navbar navbar-expand-lg ">
+    <li class="nav-item">
+        <a id="home-tab2" style="text-decoration:none;" class="nav-link" href="@Url.Action("Index", "Home")"> Home</a>
+    </li>
+    <li class="nav-item ">
+        <a id="home-tab2" class="nav-link" href="@Url.Action("Login", "University")">Log In</a>
 
+    </li>
+    <li class="nav-item ">
+        <a id="home-tab2" class="nav-link" href="@Url.Action("Register", "University")">Register</a>
+    </li>
+</ul>
 
 @using (Html.BeginForm()) 
 {
@@ -39,10 +50,12 @@
     </div>
 }
 
-<div>
+@*<div>
     @Html.ActionLink("Back to Register", "Register")
-</div>
-
+</div>*@
+<a class="btn btn-light text-lg-center" href=" @Url.Action("Register", "University")">
+    Register
+</a>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

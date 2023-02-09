@@ -2,10 +2,25 @@
 
 @{
     ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
 }
 
-<h2>Register</h2>
+<ul class="nav navbar navbar-expand-lg ">
+    <li class="nav-item">
+        <a id="home-tab2" style="text-decoration:none;" class="nav-link" href="@Url.Action("Index", "Home")">
+            Home
+        </a>
+    </li>
+    <li class="nav-item ">
+        <a id="home-tab2" class="nav-link" href="@Url.Action("Login", "University")">Log In</a>
 
+    </li>
+    <li class="nav-item ">
+        <a id="home-tab2" class="nav-link" href="@Url.Action("Register", "University")">
+            Register
+        </a>
+    </li>
+</ul>
 
 @using (Html.BeginForm()) 
 {
@@ -15,7 +30,7 @@
         <h4>UniversityDetail</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group ">
+        <div class="form-group">
             @Html.LabelFor(model => model.UniversityCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.UniversityCode, new { htmlAttributes = new { @class = "form-control" } })
