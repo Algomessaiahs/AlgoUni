@@ -19,7 +19,7 @@ namespace AlgoUni.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Membership membership, Model model)
+        public ActionResult Login(Membership membership, AlgoUni.Models.UniversityDetail model)
         {
 
 
@@ -27,16 +27,27 @@ namespace AlgoUni.Controllers
             if (UserDetail == null)
             {
 
-                return View("Login",membership);
+                return View("Login");
             }
             else
             {
-                Session["model"] = membership;
+                Session["univ2"] = UserDetail;
 
 
-                return RedirectToAction("Index","CollegeDetails");
+                return RedirectToAction("Index","StudentDetails");
             }
 
+        }
+
+        public ActionResult list()
+        {
+            var model = (AlgoUni.Models.UniversityDetail)Session["univ2"];
+            ViewBag.mail = model.EmailID;
+            ViewBag.pwd = model.Password;
+            ViewBag.user = model.Username;
+            ViewBag.code = model.UniversityCode;
+
+            return View();
         }
 
 
@@ -62,7 +73,7 @@ namespace AlgoUni.Controllers
         {
 
             Session.Abandon();
-            return RedirectToAction("Login", "CompanyRegister");
+            return RedirectToAction("Login");
         }
     }
 }

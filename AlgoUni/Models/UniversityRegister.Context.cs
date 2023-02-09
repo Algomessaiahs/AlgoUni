@@ -27,5 +27,7 @@ namespace AlgoUni.Models
     
         public virtual DbSet<UniversityDetail> UniversityDetails { get; set; }
         public virtual DbSet<CollegeDetail> CollegeDetails { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<StudentDetail> StudentDetails { get; set; }
     }
 }

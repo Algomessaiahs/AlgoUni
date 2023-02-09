@@ -18,6 +18,31 @@
           <Property Name="Password" Type="varchar" MaxLength="255" />
           <Property Name="UniversityCode" Type="varchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Roll_ID" />
+          </Key>
+          <Property Name="Roll_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailID" Type="varchar" MaxLength="255" />
+          <Property Name="UserRole" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="StudentDetails">
+          <Key>
+            <PropertyRef Name="STUD_ID" />
+          </Key>
+          <Property Name="STUD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="StudentName" Type="varchar" MaxLength="255" />
+          <Property Name="Semester" Type="varchar" MaxLength="255" />
+          <Property Name="Department" Type="varchar" MaxLength="255" />
+          <Property Name="EmailID" Type="varchar" MaxLength="255" />
+          <Property Name="Mobile" Type="varchar" MaxLength="255" />
+          <Property Name="DateofBirth" Type="date" />
+          <Property Name="JoiningYear" Type="varchar" MaxLength="255" />
+          <Property Name="CompletionYear" Type="varchar" MaxLength="255" />
+          <Property Name="CollegeCode" Type="varchar" MaxLength="255" />
+          <Property Name="UniversityCode" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="UniversityDetails">
           <Key>
             <PropertyRef Name="UniversityID" />
@@ -31,6 +56,8 @@
         </EntityType>
         <EntityContainer Name="UniversityRegisterModelStoreContainer">
           <EntitySet Name="CollegeDetails" EntityType="Self.CollegeDetails" Schema="UNIVERSITY" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="UNIVERSITY" store:Type="Tables" />
+          <EntitySet Name="StudentDetails" EntityType="Self.StudentDetails" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="UniversityDetails" EntityType="Self.UniversityDetails" Schema="UNIVERSITY" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -51,6 +78,8 @@
         <EntityContainer Name="UniversityRegister" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UniversityDetails" EntityType="Self.UniversityDetail" />
           <EntitySet Name="CollegeDetails" EntityType="UniversityRegisterModel.CollegeDetail" />
+          <EntitySet Name="Roles" EntityType="UniversityRegisterModel.Role" />
+          <EntitySet Name="StudentDetails" EntityType="UniversityRegisterModel.StudentDetail" />
         </EntityContainer>
         <EntityType Name="CollegeDetail">
           <Key>
@@ -64,6 +93,31 @@
           <Property Name="EmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="UniversityCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Roll_ID" />
+          </Key>
+          <Property Name="Roll_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UserRole" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="StudentDetail">
+          <Key>
+            <PropertyRef Name="STUD_ID" />
+          </Key>
+          <Property Name="STUD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="StudentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Semester" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DateofBirth" Type="DateTime" Precision="0" />
+          <Property Name="JoiningYear" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CompletionYear" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CollegeCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UniversityCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -94,6 +148,33 @@
                 <ScalarProperty Name="CollegeName" ColumnName="CollegeName" />
                 <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
                 <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Roll_ID" ColumnName="Roll_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentDetails">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.StudentDetail">
+              <MappingFragment StoreEntitySet="StudentDetails">
+                <ScalarProperty Name="UniversityCode" ColumnName="UniversityCode" />
+                <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
+                <ScalarProperty Name="CompletionYear" ColumnName="CompletionYear" />
+                <ScalarProperty Name="JoiningYear" ColumnName="JoiningYear" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="STUD_ID" ColumnName="STUD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
