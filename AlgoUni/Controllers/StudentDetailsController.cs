@@ -12,7 +12,7 @@ namespace AlgoUni.Controllers
 {
     public class StudentDetailsController : Controller
     {
-        TechathonDB_user11Entities db = new TechathonDB_user11Entities();
+        private UniversityRegister db = new UniversityRegister();
 
         // GET: StudentDetails
         public ActionResult Index()
@@ -46,8 +46,11 @@ namespace AlgoUni.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "STUD_ID,StudentID,StudentName,Semester,Department,EmailID,Mobile,DateofBirth,JoiningYear,CompletionYear,CollegeCode,UniversityCode")] StudentDetail studentDetail)
+        public ActionResult Create([Bind(Include = "STUD_ID,RegisterNumber,StudentID,StudentName,Semester,Dept_Code,Department,EmailID,Mobile,DateofBirth,JoiningYear,CompletionYear,CollegeCode,UniversityCode")] StudentDetail studentDetail)
         {
+            studentDetail.StudentID = studentDetail.JoiningYear.Substring(2) + studentDetail.Department + db.StudentDetails.Count();
+            //studentDetail.RegisterNumber =studentDetail.CollegeCode + studentDetail.JoiningYear + db.StudentDetails.Count();
+            studentDetail.RegisterNumber = Convert.ToInt32(studentDetail.CollegeCode) + Convert.ToInt32(studentDetail.JoiningYear.Substring(2)) + db.StudentDetails.Count();
             if (ModelState.IsValid)
             {
                 db.StudentDetails.Add(studentDetail);
@@ -78,7 +81,7 @@ namespace AlgoUni.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "STUD_ID,StudentID,StudentName,Semester,Department,EmailID,Mobile,DateofBirth,JoiningYear,CompletionYear,CollegeCode,UniversityCode")] StudentDetail studentDetail)
+        public ActionResult Edit([Bind(Include = "STUD_ID,RegisterNumber,StudentID,StudentName,Semester,Dept_Code,Department,EmailID,Mobile,DateofBirth,JoiningYear,CompletionYear,CollegeCode,UniversityCode")] StudentDetail studentDetail)
         {
             if (ModelState.IsValid)
             {

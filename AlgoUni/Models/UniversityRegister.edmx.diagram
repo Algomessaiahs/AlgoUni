@@ -4,11 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0c7708b43c254ff9a974970e021f8a21" Name="Diagram1">
-        <EntityTypeShape EntityType="TechathonDB_user11Model.Role" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechathonDB_user11Model.StudentDetail" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechathonDB_user11Model.UniversityDetail" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechathonDB_user11Model.CollegeDetail" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="90632bf368794c9fafb4d5fef53551d0" Name="Diagram1">
+        <EntityTypeShape EntityType="UniversityRegisterModel.Role" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.StudentDetail" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.Subject" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.UniversityDetail" Width="1.5" PointX="4.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.CollegeDetail" Width="1.5" PointX="0.625" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="UniversityRegisterModel.Fk_Key_UserID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

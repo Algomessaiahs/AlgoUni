@@ -12,8 +12,8 @@ namespace AlgoUni.Controllers
 {
     public class CollegeDetailsController : Controller
     {
-        //private UniversityRegister db = new UniversityRegister();
-        TechathonDB_user11Entities db = new TechathonDB_user11Entities();
+        private UniversityRegister db = new UniversityRegister();
+        //TechathonDB_user11Entities db = new TechathonDB_user11Entities();
 
         // GET: CollegeDetails
         public ActionResult Index()
@@ -35,7 +35,7 @@ namespace AlgoUni.Controllers
             }
             return View(collegeDetail);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: CollegeDetails/Create
         public ActionResult Create()
         {
@@ -47,6 +47,7 @@ namespace AlgoUni.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "CollegeID,CollegeCode,CollegeName,City,Username,EmailID,Password,UniversityCode")] CollegeDetail collegeDetail)
         {
             if (ModelState.IsValid)
@@ -58,7 +59,7 @@ namespace AlgoUni.Controllers
 
             return View(collegeDetail);
         }
-
+        [Authorize(Roles ="AO")]
         // GET: CollegeDetails/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -79,6 +80,7 @@ namespace AlgoUni.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AO")]
         public ActionResult Edit([Bind(Include = "CollegeID,CollegeCode,CollegeName,City,Username,EmailID,Password,UniversityCode")] CollegeDetail collegeDetail)
         {
             if (ModelState.IsValid)

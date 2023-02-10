@@ -12,15 +12,14 @@ namespace AlgoUni.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CollegeDetail
+    public partial class Subject
     {
-        public int CollegeID { get; set; }
-        public Nullable<int> CollegeCode { get; set; }
-        public string CollegeName { get; set; }
-        public string City { get; set; }
-        public string Username { get; set; }
-        public string EmailID { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> UniversityCode { get; set; }
+        public int Subject_ID { get; set; }
+        public string Degree { get; set; }
+        public Nullable<int> Department_Code { get; set; }
+        public string Department { get; set; }
+        public string Semester { get; set; }
+        public string SubjectCode { get; set; }
+        public string Subjects { get; set; }
     }
 }

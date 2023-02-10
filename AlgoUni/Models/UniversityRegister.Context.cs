@@ -13,10 +13,10 @@ namespace AlgoUni.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TechathonDB_user11Entities : DbContext
+    public partial class UniversityRegister : DbContext
     {
-        public TechathonDB_user11Entities()
-            : base("name=TechathonDB_user11Entities")
+        public UniversityRegister()
+            : base("name=UniversityRegister")
         {
         }
     
@@ -27,6 +27,7 @@ namespace AlgoUni.Models
     
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<StudentDetail> StudentDetails { get; set; }
+        public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<UniversityDetail> UniversityDetails { get; set; }
         public virtual DbSet<CollegeDetail> CollegeDetails { get; set; }
     }

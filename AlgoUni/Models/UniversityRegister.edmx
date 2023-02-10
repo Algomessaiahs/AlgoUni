@@ -4,9 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TechathonDB_user11Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'TechathonDB_user11.UNIVERSITY.CollegeDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="UniversityRegisterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CollegeDetails">
           <Key>
             <PropertyRef Name="CollegeID" />
@@ -18,7 +16,7 @@ warning 6002: The table/view 'TechathonDB_user11.UNIVERSITY.CollegeDetails' does
           <Property Name="Username" Type="varchar" MaxLength="255" />
           <Property Name="EmailID" Type="varchar" MaxLength="255" />
           <Property Name="Password" Type="varchar" MaxLength="255" />
-          <Property Name="UniversityCode" Type="varchar" MaxLength="10" />
+          <Property Name="UniversityCode" Type="int" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -27,6 +25,7 @@ warning 6002: The table/view 'TechathonDB_user11.UNIVERSITY.CollegeDetails' does
           <Property Name="Roll_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmailID" Type="varchar" MaxLength="255" />
           <Property Name="UserRole" Type="varchar" MaxLength="255" />
+          <Property Name="UnivID" Type="int" />
         </EntityType>
         <EntityType Name="StudentDetails">
           <Key>
@@ -37,48 +36,66 @@ warning 6002: The table/view 'TechathonDB_user11.UNIVERSITY.CollegeDetails' does
           <Property Name="StudentID" Type="varchar" MaxLength="255" />
           <Property Name="StudentName" Type="varchar" MaxLength="255" />
           <Property Name="Semester" Type="varchar" MaxLength="255" />
+          <Property Name="Dept_Code" Type="int" />
           <Property Name="Department" Type="varchar" MaxLength="255" />
           <Property Name="EmailID" Type="varchar" MaxLength="255" />
           <Property Name="Mobile" Type="varchar" MaxLength="255" />
           <Property Name="DateofBirth" Type="date" />
           <Property Name="JoiningYear" Type="varchar" MaxLength="255" />
           <Property Name="CompletionYear" Type="varchar" MaxLength="255" />
-          <Property Name="CollegeCode" Type="varchar" MaxLength="255" />
-          <Property Name="UniversityCode" Type="varchar" MaxLength="255" />
+          <Property Name="CollegeCode" Type="int" />
+          <Property Name="UniversityCode" Type="int" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="Subject_ID" />
+          </Key>
+          <Property Name="Subject_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Degree" Type="varchar" MaxLength="255" />
+          <Property Name="Department_Code" Type="int" />
+          <Property Name="Department" Type="varchar" MaxLength="255" />
+          <Property Name="Semester" Type="varchar" MaxLength="255" />
+          <Property Name="SubjectCode" Type="varchar" MaxLength="255" />
+          <Property Name="Subjects" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="UniversityDetails">
           <Key>
             <PropertyRef Name="UniversityID" />
           </Key>
           <Property Name="UniversityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UniversityCode" Type="varchar" MaxLength="10" />
+          <Property Name="UniversityCode" Type="int" />
           <Property Name="UniversityName" Type="varchar" MaxLength="255" />
           <Property Name="Username" Type="varchar" MaxLength="255" />
           <Property Name="EmailID" Type="varchar" MaxLength="255" />
           <Property Name="Password" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityContainer Name="TechathonDB_user11ModelStoreContainer">
+        <Association Name="Fk_Key_UserID">
+          <End Role="UniversityDetails" Type="Self.UniversityDetails" Multiplicity="0..1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UniversityDetails">
+              <PropertyRef Name="UniversityID" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="UnivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UniversityRegisterModelStoreContainer">
+          <EntitySet Name="CollegeDetails" EntityType="Self.CollegeDetails" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="StudentDetails" EntityType="Self.StudentDetails" Schema="UNIVERSITY" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="UniversityDetails" EntityType="Self.UniversityDetails" Schema="UNIVERSITY" store:Type="Tables" />
-          <EntitySet Name="CollegeDetails" EntityType="Self.CollegeDetails" store:Type="Tables" store:Schema="UNIVERSITY">
-            <DefiningQuery>SELECT 
-    [CollegeDetails].[CollegeID] AS [CollegeID], 
-    [CollegeDetails].[CollegeCode] AS [CollegeCode], 
-    [CollegeDetails].[CollegeName] AS [CollegeName], 
-    [CollegeDetails].[City] AS [City], 
-    [CollegeDetails].[Username] AS [Username], 
-    [CollegeDetails].[EmailID] AS [EmailID], 
-    [CollegeDetails].[Password] AS [Password], 
-    [CollegeDetails].[UniversityCode] AS [UniversityCode]
-    FROM [UNIVERSITY].[CollegeDetails] AS [CollegeDetails]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="Fk_Key_UserID" Association="Self.Fk_Key_UserID">
+            <End Role="UniversityDetails" EntitySet="UniversityDetails" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TechathonDB_user11Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="UniversityRegisterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Roll_ID" />
@@ -86,6 +103,8 @@ warning 6002: The table/view 'TechathonDB_user11.UNIVERSITY.CollegeDetails' does
           <Property Name="Roll_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="UserRole" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UnivID" Type="Int32" />
+          <NavigationProperty Name="UniversityDetail" Relationship="UniversityRegisterModel.Fk_Key_UserID" FromRole="Role" ToRole="UniversityDetail" />
         </EntityType>
         <EntityType Name="StudentDetail">
           <Key>
@@ -96,25 +115,39 @@ warning 6002: The table/view 'TechathonDB_user11.UNIVERSITY.CollegeDetails' does
           <Property Name="StudentID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="StudentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Semester" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Dept_Code" Type="Int32" />
           <Property Name="Department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="EmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Mobile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="DateofBirth" Type="DateTime" Precision="0" />
           <Property Name="JoiningYear" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CompletionYear" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="CollegeCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="UniversityCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CollegeCode" Type="Int32" />
+          <Property Name="UniversityCode" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Subject_ID" />
+          </Key>
+          <Property Name="Subject_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Degree" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Department_Code" Type="Int32" />
+          <Property Name="Department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Semester" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SubjectCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Subjects" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="UniversityDetail">
           <Key>
             <PropertyRef Name="UniversityID" />
           </Key>
           <Property Name="UniversityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UniversityCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UniversityCode" Type="Int32" />
           <Property Name="UniversityName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="EmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Roles" Relationship="UniversityRegisterModel.Fk_Key_UserID" FromRole="UniversityDetail" ToRole="Role" />
         </EntityType>
         <EntityType Name="CollegeDetail">
           <Key>
@@ -127,23 +160,41 @@ warning 6002: The table/view 'TechathonDB_user11.UNIVERSITY.CollegeDetails' does
           <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="EmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="UniversityCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UniversityCode" Type="Int32" />
         </EntityType>
-        <EntityContainer Name="TechathonDB_user11Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="UniversityRegister" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="StudentDetails" EntityType="Self.StudentDetail" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
           <EntitySet Name="UniversityDetails" EntityType="Self.UniversityDetail" />
           <EntitySet Name="CollegeDetails" EntityType="Self.CollegeDetail" />
+          <AssociationSet Name="Fk_Key_UserID" Association="UniversityRegisterModel.Fk_Key_UserID">
+            <End Role="UniversityDetail" EntitySet="UniversityDetails" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="Fk_Key_UserID">
+          <End Type="UniversityRegisterModel.UniversityDetail" Role="UniversityDetail" Multiplicity="0..1" />
+          <End Type="UniversityRegisterModel.Role" Role="Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UniversityDetail">
+              <PropertyRef Name="UniversityID" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="UnivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TechathonDB_user11ModelStoreContainer" CdmEntityContainer="TechathonDB_user11Entities">
+        <EntityContainerMapping StorageEntityContainer="UniversityRegisterModelStoreContainer" CdmEntityContainer="UniversityRegister">
           <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="TechathonDB_user11Model.Role">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.Role">
               <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="UnivID" ColumnName="UnivID" />
                 <ScalarProperty Name="Roll_ID" ColumnName="Roll_ID" />
                 <ScalarProperty Name="EmailID" ColumnName="EmailID" />
                 <ScalarProperty Name="UserRole" ColumnName="UserRole" />
@@ -151,13 +202,14 @@ warning 6002: The table/view 'TechathonDB_user11.UNIVERSITY.CollegeDetails' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StudentDetails">
-            <EntityTypeMapping TypeName="TechathonDB_user11Model.StudentDetail">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.StudentDetail">
               <MappingFragment StoreEntitySet="StudentDetails">
                 <ScalarProperty Name="STUD_ID" ColumnName="STUD_ID" />
                 <ScalarProperty Name="RegisterNumber" ColumnName="RegisterNumber" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="StudentName" ColumnName="StudentName" />
                 <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Dept_Code" ColumnName="Dept_Code" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="EmailID" ColumnName="EmailID" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
@@ -169,8 +221,21 @@ warning 6002: The table/view 'TechathonDB_user11.UNIVERSITY.CollegeDetails' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="Subject_ID" ColumnName="Subject_ID" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="Department_Code" ColumnName="Department_Code" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
+                <ScalarProperty Name="Subjects" ColumnName="Subjects" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UniversityDetails">
-            <EntityTypeMapping TypeName="TechathonDB_user11Model.UniversityDetail">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.UniversityDetail">
               <MappingFragment StoreEntitySet="UniversityDetails">
                 <ScalarProperty Name="UniversityID" ColumnName="UniversityID" />
                 <ScalarProperty Name="UniversityCode" ColumnName="UniversityCode" />
@@ -182,7 +247,7 @@ warning 6002: The table/view 'TechathonDB_user11.UNIVERSITY.CollegeDetails' does
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CollegeDetails">
-            <EntityTypeMapping TypeName="TechathonDB_user11Model.CollegeDetail">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.CollegeDetail">
               <MappingFragment StoreEntitySet="CollegeDetails">
                 <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
                 <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />

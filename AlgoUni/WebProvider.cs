@@ -38,15 +38,16 @@ namespace AlgoUni
 
         public override string[] GetRolesForUser(string email)
         {
-            using(var db = new TechathonDB_user11Entities())
+            using(var db = new UniversityRegister())
             {
-                var result = (from UniversityDetail in db.UniversityDetails
-                              join Role in db.Roles on UniversityDetail.EmailID equals Role.EmailID
-                              where UniversityDetail.EmailID == email
+                var result = (from user in db.UniversityDetails
+                              join Role in db.Roles on user.UniversityID equals Role.UnivID
+                              where user.EmailID == email
                               select Role.UserRole).ToArray();
+
                 return result;     
             }
-            throw new NotImplementedException();
+            
         }
 
         public override string[] GetUsersInRole(string roleName)

@@ -17,5 +17,8 @@ namespace AlgoUni.Models
         public int Roll_ID { get; set; }
         public string EmailID { get; set; }
         public string UserRole { get; set; }
+        public Nullable<int> UnivID { get; set; }
+    
+        public virtual UniversityDetail UniversityDetail { get; set; }
     }
 }

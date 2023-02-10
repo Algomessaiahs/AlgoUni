@@ -10,15 +10,15 @@ namespace AlgoUni.Controllers
 {
     public class UniversityController : Controller
     {
-        TechathonDB_user11Entities db = new TechathonDB_user11Entities();
+        private UniversityRegister db = new UniversityRegister();
+        //TechathonDB_user11Entities db = new TechathonDB_user11Entities();
         // GET: University
-        [AllowAnonymous]
         public ActionResult Login()
         {
             Session.Abandon();
-            return View();
+            return View("Login");
         }
-        [AllowAnonymous]
+
         [HttpPost]
         public ActionResult Login(Membership membership, AlgoUni.Models.UniversityDetail model)
         {
@@ -28,30 +28,31 @@ namespace AlgoUni.Controllers
             if (UserDetail == null)
             {
 
-                return View("Login","University");
+                return View("Login");
             }
             else
             {
                 Session["univ2"] = UserDetail;
 
 
-                return RedirectToAction("Dashboard","University");
+                //return RedirectToAction("Dashboard","University");
+                return RedirectToAction("Index", "CollegeDetails");
             }
 
         }
 
         public ActionResult list()
         {
-            var model = (AlgoUni.Models.UniversityDetail)Session["univ2"];
-            ViewBag.mail = model.EmailID;
-            ViewBag.pwd = model.Password;
-            ViewBag.user = model.Username;
-            ViewBag.code = model.UniversityCode;
+            //var model = (AlgoUni.Models.UniversityDetail)Session["univ2"];
+            //ViewBag.mail = model.EmailID;
+            //ViewBag.pwd = model.Password;
+            //ViewBag.user = model.Username;
+            //ViewBag.code = model.UniversityCode;
 
             return View();
         }
 
-        [AllowAnonymous]
+
         public ActionResult Register()
         {
             return View();
@@ -60,7 +61,7 @@ namespace AlgoUni.Controllers
         {
             return View();
         }
-        [AllowAnonymous]
+
         [HttpPost]
         public ActionResult Register(UniversityDetail data)
         {

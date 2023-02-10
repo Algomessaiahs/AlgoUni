@@ -147,6 +147,9 @@
     <Compile Include="Models\StudentDetail.cs">
       <DependentUpon>UniversityRegister.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Subject.cs">
+      <DependentUpon>UniversityRegister.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UniversityDetail.cs">
       <DependentUpon>UniversityRegister.tt</DependentUpon>
     </Compile>

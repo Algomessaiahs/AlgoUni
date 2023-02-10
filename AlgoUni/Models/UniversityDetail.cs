@@ -14,11 +14,20 @@ namespace AlgoUni.Models
     
     public partial class UniversityDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UniversityDetail()
+        {
+            this.Roles = new HashSet<Role>();
+        }
+    
         public int UniversityID { get; set; }
-        public string UniversityCode { get; set; }
+        public Nullable<int> UniversityCode { get; set; }
         public string UniversityName { get; set; }
         public string Username { get; set; }
         public string EmailID { get; set; }
         public string Password { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Role> Roles { get; set; }
     }
 }

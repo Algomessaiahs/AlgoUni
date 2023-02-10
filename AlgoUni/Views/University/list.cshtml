@@ -3,6 +3,13 @@
     ViewBag.Title = "list";
     Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
 }
+@{ 
+    var session = (AlgoUni.Models.Membership)Session["model"];
+    if (session == null)
+    {
+        Response.Redirect("~/University/Login");
+    }
+}
 
 <h2>list</h2>
 <h2>@ViewBag.code</h2>
