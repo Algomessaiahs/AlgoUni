@@ -11,42 +11,56 @@
 <body>
     <div class="row">
         <div class="col-2"></div>
-        <div class="col-4"><h1>Rencata University</h1><p></p></div>
+
     </div>
-   
-    <ul class="nav navbar navbar-expand-lg ">
+    @*<div class=" navbar navbar-expand-lg  id="home-tab2">*@
+        @*<div class="col-4" ><h1>Algo Uni</h1><p></p></div>*@
+
+<div class="navbar navbar-expand-lg fixed-top p-md-4" style="background-color: #6082B6; ">
+    <ul class="nav navbar navbar-expand-sm fixed-top">
         <li class="nav-item">
-            <a id="home-tab2" style="text-decoration:none;" class="nav-link" href="@Url.Action("Index", "Home")">Home
+            <a id="home-tab2" style="text-decoration:none;" class="nav-link" href="@Url.Action("Index", "Home")">
+                Home
             </a>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item px-xxl-4">
             <a id="home-tab2" class="nav-link" href="@Url.Action("About", "Home")">About Us</a>
-            
+
         </li>
-        <li class="nav-item ">
-            <a id="home-tab2" class="nav-link" href="@Url.Action("Contact", "Home")">Contact Us
-                
+        <li class="nav-item px-xxl-4">
+            <a id="home-tab2" class="nav-link" href="@Url.Action("Contact", "Home")">
+                Contact Us
             </a>
         </li>
     </ul>
+</div>
+   
+    @*</div>*@
+    <br class="w-25 p-3" />
     <div class="container body-content">
         @RenderBody()
-      <style>
-          body,header,footer{
-              background-color:#6082B6;
-              color:aliceblue;
-          }
-          #home-tab2 {
-              text-decoration: none;
-              text-decoration-color: none;
-              font-weight: 700;
-              color: white;
-              background-color: #6082B6;
-          }
-          
-      </style>
+        <style>
+            body, header, footer {
+                background-color: lightgrey;
+                color: black;
+            }
+
+            #home-tab2 {
+                text-decoration: none;
+                text-decoration-color: none;
+                font-weight: 700;
+                color: lightgrey;
+                background-color: #6082B6;
+                font-size:large;
+                float:right;
+            }
+
+                #home-tab2:active, hover, focus {
+                    color: white;
+                    background-color: #6082B6;
+                }
+        </style>
         <footer>
-          
         </footer>
     </div>
 

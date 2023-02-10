@@ -4,13 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="UniversityRegisterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TechathonDB_user11Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TechathonDB_user11.UNIVERSITY.CollegeDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CollegeDetails">
           <Key>
             <PropertyRef Name="CollegeID" />
           </Key>
           <Property Name="CollegeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CollegeCode" Type="varchar" MaxLength="10" />
+          <Property Name="CollegeCode" Type="int" />
           <Property Name="CollegeName" Type="varchar" MaxLength="255" />
           <Property Name="City" Type="varchar" MaxLength="255" />
           <Property Name="Username" Type="varchar" MaxLength="255" />
@@ -31,7 +33,8 @@
             <PropertyRef Name="STUD_ID" />
           </Key>
           <Property Name="STUD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StudentID" Type="int" />
+          <Property Name="RegisterNumber" Type="bigint" />
+          <Property Name="StudentID" Type="varchar" MaxLength="255" />
           <Property Name="StudentName" Type="varchar" MaxLength="255" />
           <Property Name="Semester" Type="varchar" MaxLength="255" />
           <Property Name="Department" Type="varchar" MaxLength="255" />
@@ -54,46 +57,28 @@
           <Property Name="EmailID" Type="varchar" MaxLength="255" />
           <Property Name="Password" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityContainer Name="UniversityRegisterModelStoreContainer">
-          <EntitySet Name="CollegeDetails" EntityType="Self.CollegeDetails" Schema="UNIVERSITY" store:Type="Tables" />
+        <EntityContainer Name="TechathonDB_user11ModelStoreContainer">
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="StudentDetails" EntityType="Self.StudentDetails" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="UniversityDetails" EntityType="Self.UniversityDetails" Schema="UNIVERSITY" store:Type="Tables" />
+          <EntitySet Name="CollegeDetails" EntityType="Self.CollegeDetails" store:Type="Tables" store:Schema="UNIVERSITY">
+            <DefiningQuery>SELECT 
+    [CollegeDetails].[CollegeID] AS [CollegeID], 
+    [CollegeDetails].[CollegeCode] AS [CollegeCode], 
+    [CollegeDetails].[CollegeName] AS [CollegeName], 
+    [CollegeDetails].[City] AS [City], 
+    [CollegeDetails].[Username] AS [Username], 
+    [CollegeDetails].[EmailID] AS [EmailID], 
+    [CollegeDetails].[Password] AS [Password], 
+    [CollegeDetails].[UniversityCode] AS [UniversityCode]
+    FROM [UNIVERSITY].[CollegeDetails] AS [CollegeDetails]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="UniversityRegisterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="UniversityDetail">
-          <Key>
-            <PropertyRef Name="UniversityID" />
-          </Key>
-          <Property Name="UniversityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UniversityCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="UniversityName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="EmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityContainer Name="UniversityRegister" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="UniversityDetails" EntityType="Self.UniversityDetail" />
-          <EntitySet Name="CollegeDetails" EntityType="UniversityRegisterModel.CollegeDetail" />
-          <EntitySet Name="Roles" EntityType="UniversityRegisterModel.Role" />
-          <EntitySet Name="StudentDetails" EntityType="UniversityRegisterModel.StudentDetail" />
-        </EntityContainer>
-        <EntityType Name="CollegeDetail">
-          <Key>
-            <PropertyRef Name="CollegeID" />
-          </Key>
-          <Property Name="CollegeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CollegeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="CollegeName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="EmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="UniversityCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
+      <Schema Namespace="TechathonDB_user11Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Roll_ID" />
@@ -107,7 +92,8 @@
             <PropertyRef Name="STUD_ID" />
           </Key>
           <Property Name="STUD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StudentID" Type="Int32" />
+          <Property Name="RegisterNumber" Type="Int64" />
+          <Property Name="StudentID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="StudentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Semester" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -119,14 +105,72 @@
           <Property Name="CollegeCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="UniversityCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="UniversityDetail">
+          <Key>
+            <PropertyRef Name="UniversityID" />
+          </Key>
+          <Property Name="UniversityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UniversityCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UniversityName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CollegeDetail">
+          <Key>
+            <PropertyRef Name="CollegeID" />
+          </Key>
+          <Property Name="CollegeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CollegeCode" Type="Int32" />
+          <Property Name="CollegeName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UniversityCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="TechathonDB_user11Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="StudentDetails" EntityType="Self.StudentDetail" />
+          <EntitySet Name="UniversityDetails" EntityType="Self.UniversityDetail" />
+          <EntitySet Name="CollegeDetails" EntityType="Self.CollegeDetail" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="UniversityRegisterModelStoreContainer" CdmEntityContainer="UniversityRegister">
+        <EntityContainerMapping StorageEntityContainer="TechathonDB_user11ModelStoreContainer" CdmEntityContainer="TechathonDB_user11Entities">
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TechathonDB_user11Model.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Roll_ID" ColumnName="Roll_ID" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentDetails">
+            <EntityTypeMapping TypeName="TechathonDB_user11Model.StudentDetail">
+              <MappingFragment StoreEntitySet="StudentDetails">
+                <ScalarProperty Name="STUD_ID" ColumnName="STUD_ID" />
+                <ScalarProperty Name="RegisterNumber" ColumnName="RegisterNumber" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="JoiningYear" ColumnName="JoiningYear" />
+                <ScalarProperty Name="CompletionYear" ColumnName="CompletionYear" />
+                <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
+                <ScalarProperty Name="UniversityCode" ColumnName="UniversityCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UniversityDetails">
-            <EntityTypeMapping TypeName="UniversityRegisterModel.UniversityDetail">
+            <EntityTypeMapping TypeName="TechathonDB_user11Model.UniversityDetail">
               <MappingFragment StoreEntitySet="UniversityDetails">
                 <ScalarProperty Name="UniversityID" ColumnName="UniversityID" />
                 <ScalarProperty Name="UniversityCode" ColumnName="UniversityCode" />
@@ -138,43 +182,16 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CollegeDetails">
-            <EntityTypeMapping TypeName="UniversityRegisterModel.CollegeDetail">
+            <EntityTypeMapping TypeName="TechathonDB_user11Model.CollegeDetail">
               <MappingFragment StoreEntitySet="CollegeDetails">
-                <ScalarProperty Name="UniversityCode" ColumnName="UniversityCode" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="CollegeName" ColumnName="CollegeName" />
-                <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
                 <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="UniversityRegisterModel.Role">
-              <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
-                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="Roll_ID" ColumnName="Roll_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StudentDetails">
-            <EntityTypeMapping TypeName="UniversityRegisterModel.StudentDetail">
-              <MappingFragment StoreEntitySet="StudentDetails">
-                <ScalarProperty Name="UniversityCode" ColumnName="UniversityCode" />
                 <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
-                <ScalarProperty Name="CompletionYear" ColumnName="CompletionYear" />
-                <ScalarProperty Name="JoiningYear" ColumnName="JoiningYear" />
-                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CollegeName" ColumnName="CollegeName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="Semester" ColumnName="Semester" />
-                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="STUD_ID" ColumnName="STUD_ID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UniversityCode" ColumnName="UniversityCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

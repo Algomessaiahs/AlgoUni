@@ -15,7 +15,7 @@ namespace AlgoUni.Models
     public partial class CollegeDetail
     {
         public int CollegeID { get; set; }
-        public string CollegeCode { get; set; }
+        public Nullable<int> CollegeCode { get; set; }
         public string CollegeName { get; set; }
         public string City { get; set; }
         public string Username { get; set; }

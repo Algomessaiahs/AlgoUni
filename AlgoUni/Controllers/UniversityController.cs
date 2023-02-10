@@ -10,14 +10,15 @@ namespace AlgoUni.Controllers
 {
     public class UniversityController : Controller
     {
-        UniversityRegister db = new UniversityRegister();
+        TechathonDB_user11Entities db = new TechathonDB_user11Entities();
         // GET: University
+        [AllowAnonymous]
         public ActionResult Login()
         {
             Session.Abandon();
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(Membership membership, AlgoUni.Models.UniversityDetail model)
         {
@@ -27,14 +28,14 @@ namespace AlgoUni.Controllers
             if (UserDetail == null)
             {
 
-                return View("Login");
+                return View("Login","University");
             }
             else
             {
                 Session["univ2"] = UserDetail;
 
 
-                return RedirectToAction("Index","StudentDetails");
+                return RedirectToAction("Dashboard","University");
             }
 
         }
@@ -50,12 +51,16 @@ namespace AlgoUni.Controllers
             return View();
         }
 
-
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
-
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Register(UniversityDetail data)
         {

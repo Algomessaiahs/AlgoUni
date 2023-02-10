@@ -12,7 +12,7 @@ namespace AlgoUni.Controllers
 {
     public class StudentDetailsController : Controller
     {
-        private UniversityRegister db = new UniversityRegister();
+        TechathonDB_user11Entities db = new TechathonDB_user11Entities();
 
         // GET: StudentDetails
         public ActionResult Index()

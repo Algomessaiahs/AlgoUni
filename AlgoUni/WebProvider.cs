@@ -38,7 +38,7 @@ namespace AlgoUni
 
         public override string[] GetRolesForUser(string email)
         {
-            using(var db = new UniversityRegister())
+            using(var db = new TechathonDB_user11Entities())
             {
                 var result = (from UniversityDetail in db.UniversityDetails
                               join Role in db.Roles on UniversityDetail.EmailID equals Role.EmailID

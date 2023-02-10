@@ -11,18 +11,17 @@ namespace AlgoUni.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class StudentDetail
     {
         public int STUD_ID { get; set; }
-        public Nullable<int> StudentID { get; set; }
+        public Nullable<long> RegisterNumber { get; set; }
+        public string StudentID { get; set; }
         public string StudentName { get; set; }
         public string Semester { get; set; }
         public string Department { get; set; }
         public string EmailID { get; set; }
         public string Mobile { get; set; }
-        [DataType(DataType.Date)]
         public Nullable<System.DateTime> DateofBirth { get; set; }
         public string JoiningYear { get; set; }
         public string CompletionYear { get; set; }
