@@ -36,18 +36,21 @@ namespace AlgoUni
             throw new NotImplementedException();
         }
 
-        public override string[] GetRolesForUser(string email)
+        public override string[] GetRolesForUser(string username)
         {
-            using(var db = new UniversityRegister())
-            {
-                var result = (from user in db.UniversityDetails
-                              join Role in db.Roles on user.UniversityID equals Role.UnivID
-                              where user.EmailID == email
-                              select Role.UserRole).ToArray();
-
-                return result;     
-            }
             
+ using (var context = new UniversityRegister())
+            {
+                var res = (from univ in context.UniversityDetails
+                           join
+                           role in context.Roles on univ.UniversityID equals role.UnivID
+                           where univ.EmailID == username
+                           select role.UserRole).ToArray();
+                return res;
+            }
+
+
+
         }
 
         public override string[] GetUsersInRole(string roleName)

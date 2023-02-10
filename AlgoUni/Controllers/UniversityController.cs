@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AlgoUni.Models;
 using System.Net;
+using System.Web.Security;
 
 namespace AlgoUni.Controllers
 {
@@ -15,30 +16,51 @@ namespace AlgoUni.Controllers
         // GET: University
         public ActionResult Login()
         {
+
             Session.Abandon();
             return View("Login");
         }
 
         [HttpPost]
-        public ActionResult Login(Membership membership, AlgoUni.Models.UniversityDetail model)
+        //public ActionResult Login(Membership membership, AlgoUni.Models.UniversityDetail model)
+        //{
+
+
+        //    var UserDetail = db.UniversityDetails.Where(x => x.EmailID == membership.EmailId && x.Password == membership.Password).FirstOrDefault();
+
+        //    if (UserDetail == null)
+        //    {
+
+        //        return View("Login");
+        //    }
+        //    else
+        //    {
+        //        Session["univ2"] = UserDetail;
+
+
+        //        //return RedirectToAction("Dashboard","University");
+        //        return RedirectToAction("Index", "CollegeDetails");
+        //    }
+
+        // }
+        public ActionResult Login(UniversityDetail users, string ReturnUrl)
         {
-
-
-            var UserDetail = db.UniversityDetails.Where(x => x.EmailID == membership.EmailId && x.Password == membership.Password).FirstOrDefault();
-            if (UserDetail == null)
+            var user = db.UniversityDetails.Where(x => x.EmailID == users.EmailID && x.Password == users.Password).FirstOrDefault();
+            if (user != null)
             {
+                FormsAuthentication.SetAuthCookie(users.EmailID, true);
+                //Session["univ2"] = users.EmailID.ToString();              
+                   if (ReturnUrl != null)
+                {
+                    return Redirect(ReturnUrl);
+                }
 
-                return View("Login");
+                 else
+                {
+                    return RedirectToAction("Index", "CollegeDetails");
+                }
             }
-            else
-            {
-                Session["univ2"] = UserDetail;
-
-
-                //return RedirectToAction("Dashboard","University");
-                return RedirectToAction("Index", "CollegeDetails");
-            }
-
+            return View();
         }
 
         public ActionResult list()

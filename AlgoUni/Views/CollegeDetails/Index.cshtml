@@ -59,11 +59,37 @@
             @Html.DisplayFor(modelItem => item.UniversityCode)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CollegeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CollegeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CollegeID })
-        </td>
-    </tr>
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CollegeID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CollegeID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CollegeID })
+                </td>
+            }
+            if (User.IsInRole("Director"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CollegeID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CollegeID })
+                </td>
+            }
+            if (User.IsInRole("ExamCell"))
+            {
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.CollegeID })
+                </td>
+            }
+        }
+
+
+        @*@Html.ActionLink("Edit", "Edit", new { id=item.CollegeID }) |
+        @Html.ActionLink("Details", "Details", new { id=item.CollegeID }) |
+        @Html.ActionLink("Delete", "Delete", new { id=item.CollegeID })*@
+            </td>
+        </tr>
 }
 
 </table>
