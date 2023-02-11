@@ -1,12 +1,12 @@
 ﻿@{
-//var session = (AlgoUni.Models.Membership)Session["model"];
-//if (session == null)
-//{
-//    Response.Redirect("~/University/Login");
-//}
-//if (string.Compare(session?. , "Company",true)==0)
-//{
-//    Response.Redirect("~/CompanyRegister/Login");
+    var session = (AlgoUni.Models.UniversityRegister)Session["model"];
+    //if (session == null)
+    //{
+    //    Response.Redirect("~/University/Login");
+    //}
+    //if (string.Compare(session?. , "Company",true)==0)
+    //{
+    //    Response.Redirect("~/CompanyRegister/Login");
 }
 
     <!DOCTYPE html>
@@ -50,8 +50,32 @@
                 <div class="input-group py-xl-5 w-100 m-md-1 p-4">
                     @*<a id="home-tab2" style="text-decoration:none;" class="nav-link " href="@Url.Action("Index", "Home")"> Home</a>*@
                     @*<a id="home-tab2" class="nav-link " href="@Url.Action("Login", "University")">Log In</a>
-                        <a id="home-tab2" class="nav-link " href="@Url.Action("Register", "University")">Register</*@a>
-                    <a id="home-tab2" class="nav-link " href="@Url.Action("LogOut", "University")">Log Out</a>
+        <a id="home-tab2" class="nav-link " href="@Url.Action("Register", "University")">Register</*@a>
+                    @*@if(User.Identity.IsAuthenticated)
+        {
+
+            <a id="home-tab2" class="nav-link ">Hi,  </a>
+            <a id="home-tab2" class="nav-link " href="@Url.Action("LogOut", "University")">Log Out</a>
+        }
+        else
+        {
+            <a id="home-tab2" class="nav-link" href="@Url.Action("Login","University")">LogIn</a>
+        }*@
+                    <ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Logout", "Logout", "University")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Login", "Login", "University")</li>
+                            @*<li>@Html.ActionLink("SignUp", "Signup", "UserAccount")</li>*@
+                        }
+                    </ul>
+                    <a id="home-tab2" class="nav-link " href="@Url.Action("Result", "University")">Result</a>
+                    <a id="home-tab2" class="nav-link " href="@Url.Action("ExamNotify", "University")">ExamNotify</a>
+                    <a id="home-tab2" class="nav-link " href="@Url.Action("Student", "College")">Student</a>
+                    <a id="home-tab2" class="nav-link " href="@Url.Action("College", "University")">College</a>
                     <a id="home-tab2" class="nav-link disabled" href="@Url.Action("Register", "University")">Research</a>
                     <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>

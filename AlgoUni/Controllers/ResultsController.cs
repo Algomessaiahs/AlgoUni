@@ -10,110 +10,107 @@ using AlgoUni.Models;
 
 namespace AlgoUni.Controllers
 {
-    public class CollegeDetailsController : Controller
+    public class ResultsController : Controller
     {
         private UniversityRegister db = new UniversityRegister();
-        //TechathonDB_user11Entities db = new TechathonDB_user11Entities();
 
-        // GET: CollegeDetails
-        public ActionResult Index()
+        // GET: Results
+        public ActionResult ResultIndex()
         {
-            return View(db.CollegeDetails.ToList());
+            return View(db.Results.ToList());
         }
 
-        // GET: CollegeDetails/Details/5
-        public ActionResult Details(int? id)
+        // GET: Results/Details/5
+        public ActionResult ResultDetails(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CollegeDetail collegeDetail = db.CollegeDetails.Find(id);
-            if (collegeDetail == null)
+            Result result = db.Results.Find(id);
+            if (result == null)
             {
                 return HttpNotFound();
             }
-            return View(collegeDetail);
+            return View(result);
         }
-        [Authorize(Roles = "Admin")]
-        // GET: CollegeDetails/Create
-        public ActionResult Create()
+
+        // GET: Results/Create
+        public ActionResult ResultCreate()
         {
             return View();
         }
 
-        // POST: CollegeDetails/Create
+        // POST: Results/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "CollegeID,CollegeCode,CollegeName,City,Username,EmailID,Password,UniversityCode")] CollegeDetail collegeDetail)
+        public ActionResult ResultCreate([Bind(Include = "ResultID,ExamCode,Degree,StudentID,StudentName,Department,DepartmentCode,Semester,Subjects,ExamResult,Grade,CollegeCode,UnivCode")] Result result)
         {
             if (ModelState.IsValid)
             {
-                db.CollegeDetails.Add(collegeDetail);
+                db.Results.Add(result);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(collegeDetail);
+            return View(result);
         }
-        //[Authorize(Roles ="AO")]
-        // GET: CollegeDetails/Edit/5
-        public ActionResult Edit(int? id)
+
+        // GET: Results/Edit/5
+        public ActionResult ResultEdit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CollegeDetail collegeDetail = db.CollegeDetails.Find(id);
-            if (collegeDetail == null)
+            Result result = db.Results.Find(id);
+            if (result == null)
             {
                 return HttpNotFound();
             }
-            return View(collegeDetail);
+            return View(result);
         }
 
-        // POST: CollegeDetails/Edit/5
+        // POST: Results/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "AO")]
-        public ActionResult Edit([Bind(Include = "CollegeID,CollegeCode,CollegeName,City,Username,EmailID,Password,UniversityCode")] CollegeDetail collegeDetail)
+        public ActionResult ResultEdit([Bind(Include = "ResultID,ExamCode,Degree,StudentID,StudentName,Department,DepartmentCode,Semester,Subjects,ExamResult,Grade,CollegeCode,UnivCode")] Result result)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(collegeDetail).State = EntityState.Modified;
+                db.Entry(result).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(collegeDetail);
+            return View(result);
         }
 
-        // GET: CollegeDetails/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Results/Delete/5
+        public ActionResult ResultDelete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CollegeDetail collegeDetail = db.CollegeDetails.Find(id);
-            if (collegeDetail == null)
+            Result result = db.Results.Find(id);
+            if (result == null)
             {
                 return HttpNotFound();
             }
-            return View(collegeDetail);
+            return View(result);
         }
 
-        // POST: CollegeDetails/Delete/5
+        // POST: Results/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult ResultDeleteConfirmed(int id)
         {
-            CollegeDetail collegeDetail = db.CollegeDetails.Find(id);
-            db.CollegeDetails.Remove(collegeDetail);
+            Result result = db.Results.Find(id);
+            db.Results.Remove(result);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

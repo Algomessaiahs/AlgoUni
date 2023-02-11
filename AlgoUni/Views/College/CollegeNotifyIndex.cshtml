@@ -1,0 +1,77 @@
+﻿@model IEnumerable<AlgoUni.Models.CollegeExamNotice>
+
+@{
+    ViewBag.Title = "CollegeNotifyIndex";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+}
+
+<h2>CollegeNotifyIndex</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExamCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Degree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Semester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExamFees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OtherFees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TutionFees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnivCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CollegeCode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Degree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Semester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamFees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OtherFees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TutionFees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnivCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CollegeCode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "CollegeNotifyEdit", new { id = item.CollegeExamNoticeID }) |
+            @Html.ActionLink("Details", "CollegeNotifyDetails", new { id = item.CollegeExamNoticeID }) |
+            @Html.ActionLink("Send", "StudentNotifySend", new { id = item.CollegeExamNoticeID })
+
+        </td>
+    </tr>
+}
+
+</table>

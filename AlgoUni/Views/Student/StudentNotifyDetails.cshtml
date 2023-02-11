@@ -1,0 +1,123 @@
+﻿@model AlgoUni.Models.StudentExamNotice
+
+@{
+    ViewBag.Title = "StudentNotifyDetails";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+}
+
+<h2>StudentNotifyDetails</h2>
+
+<div>
+    <h4>StudentExamNotice</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ExamCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExamCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Degree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Degree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeptartmentCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeptartmentCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Semester)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Semester)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCurrentSubjects)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCurrentSubjects)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subjects)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subjects)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TutionFees)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TutionFees)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExamFees)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExamFees)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherFees)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherFees)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollegeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollegeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnivCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnivCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.studentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "StudentNotifyEdit", new { id = Model.StudentExamNoticeID }) |
+    @Html.ActionLink("Back to List", "StudentNotifyIndex")
+</p>

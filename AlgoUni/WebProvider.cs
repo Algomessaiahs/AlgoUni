@@ -39,7 +39,7 @@ namespace AlgoUni
         public override string[] GetRolesForUser(string username)
         {
             
- using (var context = new UniversityRegister())
+        using (var context = new UniversityRegister())
             {
                 var res = (from univ in context.UniversityDetails
                            join

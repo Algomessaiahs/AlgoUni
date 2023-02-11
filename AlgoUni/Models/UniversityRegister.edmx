@@ -18,6 +18,50 @@
           <Property Name="Password" Type="varchar" MaxLength="255" />
           <Property Name="UniversityCode" Type="int" />
         </EntityType>
+        <EntityType Name="CollegeExamNotice">
+          <Key>
+            <PropertyRef Name="CollegeExamNoticeID" />
+          </Key>
+          <Property Name="CollegeExamNoticeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamCode" Type="varchar" MaxLength="255" />
+          <Property Name="Degree" Type="varchar" MaxLength="255" />
+          <Property Name="Semester" Type="varchar" MaxLength="255" />
+          <Property Name="ExamFees" Type="int" />
+          <Property Name="OtherFees" Type="int" />
+          <Property Name="TutionFees" Type="int" />
+          <Property Name="UnivCode" Type="int" />
+          <Property Name="CollegeCode" Type="int" />
+        </EntityType>
+        <EntityType Name="ExamNotification">
+          <Key>
+            <PropertyRef Name="ExamNotifyID" />
+          </Key>
+          <Property Name="ExamNotifyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamCode" Type="varchar" MaxLength="255" />
+          <Property Name="Degree" Type="varchar" MaxLength="255" />
+          <Property Name="Semester" Type="varchar" MaxLength="255" />
+          <Property Name="ExamFees" Type="int" />
+          <Property Name="OtherFees" Type="int" />
+          <Property Name="UnivCode" Type="int" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamCode" Type="varchar" MaxLength="255" />
+          <Property Name="Degree" Type="varchar" MaxLength="255" />
+          <Property Name="StudentID" Type="varchar" MaxLength="255" />
+          <Property Name="StudentName" Type="varchar" MaxLength="255" />
+          <Property Name="Department" Type="varchar" MaxLength="255" />
+          <Property Name="DepartmentCode" Type="int" />
+          <Property Name="Semester" Type="varchar" MaxLength="255" />
+          <Property Name="Subjects" Type="varchar" MaxLength="255" />
+          <Property Name="ExamResult" Type="varchar" MaxLength="255" />
+          <Property Name="Grade" Type="varchar" MaxLength="255" />
+          <Property Name="CollegeCode" Type="int" />
+          <Property Name="UnivCode" Type="int" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="Roll_ID" />
@@ -45,6 +89,26 @@
           <Property Name="CompletionYear" Type="varchar" MaxLength="255" />
           <Property Name="CollegeCode" Type="int" />
           <Property Name="UniversityCode" Type="int" />
+          <Property Name="Degree" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="StudentExamNotice">
+          <Key>
+            <PropertyRef Name="StudentExamNoticeID" />
+          </Key>
+          <Property Name="StudentExamNoticeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamCode" Type="varchar" MaxLength="255" />
+          <Property Name="Degree" Type="varchar" MaxLength="255" />
+          <Property Name="DeptartmentCode" Type="int" />
+          <Property Name="Semester" Type="varchar" MaxLength="255" />
+          <Property Name="TotalCurrentSubjects" Type="int" />
+          <Property Name="Subjects" Type="varchar" MaxLength="255" />
+          <Property Name="TutionFees" Type="int" />
+          <Property Name="ExamFees" Type="int" />
+          <Property Name="OtherFees" Type="int" />
+          <Property Name="CollegeCode" Type="int" />
+          <Property Name="UnivCode" Type="int" />
+          <Property Name="studentID" Type="varchar" MaxLength="255" />
+          <Property Name="Department" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Subjects">
           <Key>
@@ -83,8 +147,12 @@
         </Association>
         <EntityContainer Name="UniversityRegisterModelStoreContainer">
           <EntitySet Name="CollegeDetails" EntityType="Self.CollegeDetails" Schema="UNIVERSITY" store:Type="Tables" />
+          <EntitySet Name="CollegeExamNotice" EntityType="Self.CollegeExamNotice" Schema="UNIVERSITY" store:Type="Tables" />
+          <EntitySet Name="ExamNotification" EntityType="Self.ExamNotification" Schema="UNIVERSITY" store:Type="Tables" />
+          <EntitySet Name="Result" EntityType="Self.Result" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="StudentDetails" EntityType="Self.StudentDetails" Schema="UNIVERSITY" store:Type="Tables" />
+          <EntitySet Name="StudentExamNotice" EntityType="Self.StudentExamNotice" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="UniversityDetails" EntityType="Self.UniversityDetails" Schema="UNIVERSITY" store:Type="Tables" />
           <AssociationSet Name="Fk_Key_UserID" Association="Self.Fk_Key_UserID">
@@ -124,6 +192,7 @@
           <Property Name="CompletionYear" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CollegeCode" Type="Int32" />
           <Property Name="UniversityCode" Type="Int32" />
+          <Property Name="Degree" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -172,6 +241,10 @@
             <End Role="UniversityDetail" EntitySet="UniversityDetails" />
             <End Role="Role" EntitySet="Roles" />
           </AssociationSet>
+          <EntitySet Name="ExamNotifications" EntityType="UniversityRegisterModel.ExamNotification" />
+          <EntitySet Name="CollegeExamNotices" EntityType="UniversityRegisterModel.CollegeExamNotice" />
+          <EntitySet Name="StudentExamNotices" EntityType="UniversityRegisterModel.StudentExamNotice" />
+          <EntitySet Name="Results" EntityType="UniversityRegisterModel.Result" />
         </EntityContainer>
         <Association Name="Fk_Key_UserID">
           <End Type="UniversityRegisterModel.UniversityDetail" Role="UniversityDetail" Multiplicity="0..1" />
@@ -185,6 +258,69 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ExamNotification">
+          <Key>
+            <PropertyRef Name="ExamNotifyID" />
+          </Key>
+          <Property Name="ExamNotifyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Degree" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Semester" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ExamFees" Type="Int32" />
+          <Property Name="OtherFees" Type="Int32" />
+          <Property Name="UnivCode" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CollegeExamNotice">
+          <Key>
+            <PropertyRef Name="CollegeExamNoticeID" />
+          </Key>
+          <Property Name="CollegeExamNoticeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Degree" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Semester" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ExamFees" Type="Int32" />
+          <Property Name="OtherFees" Type="Int32" />
+          <Property Name="TutionFees" Type="Int32" />
+          <Property Name="UnivCode" Type="Int32" />
+          <Property Name="CollegeCode" Type="Int32" />
+        </EntityType>
+        <EntityType Name="StudentExamNotice">
+          <Key>
+            <PropertyRef Name="StudentExamNoticeID" />
+          </Key>
+          <Property Name="StudentExamNoticeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Degree" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DeptartmentCode" Type="Int32" />
+          <Property Name="Semester" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TotalCurrentSubjects" Type="Int32" />
+          <Property Name="Subjects" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TutionFees" Type="Int32" />
+          <Property Name="ExamFees" Type="Int32" />
+          <Property Name="OtherFees" Type="Int32" />
+          <Property Name="CollegeCode" Type="Int32" />
+          <Property Name="UnivCode" Type="Int32" />
+          <Property Name="studentID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Degree" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StudentID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="StudentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DepartmentCode" Type="Int32" />
+          <Property Name="Semester" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Subjects" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ExamResult" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Grade" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CollegeCode" Type="Int32" />
+          <Property Name="UnivCode" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -204,6 +340,7 @@
           <EntitySetMapping Name="StudentDetails">
             <EntityTypeMapping TypeName="UniversityRegisterModel.StudentDetail">
               <MappingFragment StoreEntitySet="StudentDetails">
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
                 <ScalarProperty Name="STUD_ID" ColumnName="STUD_ID" />
                 <ScalarProperty Name="RegisterNumber" ColumnName="RegisterNumber" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
@@ -257,6 +394,73 @@
                 <ScalarProperty Name="EmailID" ColumnName="EmailID" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UniversityCode" ColumnName="UniversityCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamNotifications">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.ExamNotification">
+              <MappingFragment StoreEntitySet="ExamNotification">
+                <ScalarProperty Name="UnivCode" ColumnName="UnivCode" />
+                <ScalarProperty Name="OtherFees" ColumnName="OtherFees" />
+                <ScalarProperty Name="ExamFees" ColumnName="ExamFees" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
+                <ScalarProperty Name="ExamNotifyID" ColumnName="ExamNotifyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CollegeExamNotices">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.CollegeExamNotice">
+              <MappingFragment StoreEntitySet="CollegeExamNotice">
+                <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
+                <ScalarProperty Name="UnivCode" ColumnName="UnivCode" />
+                <ScalarProperty Name="TutionFees" ColumnName="TutionFees" />
+                <ScalarProperty Name="OtherFees" ColumnName="OtherFees" />
+                <ScalarProperty Name="ExamFees" ColumnName="ExamFees" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
+                <ScalarProperty Name="CollegeExamNoticeID" ColumnName="CollegeExamNoticeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentExamNotices">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.StudentExamNotice">
+              <MappingFragment StoreEntitySet="StudentExamNotice">
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="UnivCode" ColumnName="UnivCode" />
+                <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
+                <ScalarProperty Name="OtherFees" ColumnName="OtherFees" />
+                <ScalarProperty Name="ExamFees" ColumnName="ExamFees" />
+                <ScalarProperty Name="TutionFees" ColumnName="TutionFees" />
+                <ScalarProperty Name="Subjects" ColumnName="Subjects" />
+                <ScalarProperty Name="TotalCurrentSubjects" ColumnName="TotalCurrentSubjects" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="DeptartmentCode" ColumnName="DeptartmentCode" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
+                <ScalarProperty Name="StudentExamNoticeID" ColumnName="StudentExamNoticeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.Result">
+              <MappingFragment StoreEntitySet="Result">
+                <ScalarProperty Name="UnivCode" ColumnName="UnivCode" />
+                <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="ExamResult" ColumnName="ExamResult" />
+                <ScalarProperty Name="Subjects" ColumnName="Subjects" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
+                <ScalarProperty Name="ResultID" ColumnName="ResultID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

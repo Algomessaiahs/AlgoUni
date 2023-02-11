@@ -12,22 +12,20 @@ namespace AlgoUni.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentDetail
+    public partial class Result
     {
-        public int STUD_ID { get; set; }
-        public Nullable<long> RegisterNumber { get; set; }
+        public int ResultID { get; set; }
+        public string ExamCode { get; set; }
+        public string Degree { get; set; }
         public string StudentID { get; set; }
         public string StudentName { get; set; }
-        public string Semester { get; set; }
-        public Nullable<int> Dept_Code { get; set; }
         public string Department { get; set; }
-        public string EmailID { get; set; }
-        public string Mobile { get; set; }
-        public Nullable<System.DateTime> DateofBirth { get; set; }
-        public string JoiningYear { get; set; }
-        public string CompletionYear { get; set; }
+        public Nullable<int> DepartmentCode { get; set; }
+        public string Semester { get; set; }
+        public string Subjects { get; set; }
+        public string ExamResult { get; set; }
+        public string Grade { get; set; }
         public Nullable<int> CollegeCode { get; set; }
-        public Nullable<int> UniversityCode { get; set; }
-        public string Degree { get; set; }
+        public Nullable<int> UnivCode { get; set; }
     }
 }

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<AlgoUni.Models.StudentExamNotice>
+
+@{
+    ViewBag.Title = "StudentNotifyIndex";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+}
+
+<h2>StudentNotifyIndex</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExamCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Degree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeptartmentCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Semester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalCurrentSubjects)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subjects)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TutionFees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExamFees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OtherFees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CollegeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnivCode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Degree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeptartmentCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Semester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalCurrentSubjects)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subjects)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TutionFees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamFees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OtherFees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CollegeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnivCode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "StudentNotifyEdit", new { id=item.StudentExamNoticeID }) |
+            @Html.ActionLink("Details", "StudentNotifyDetails", new { id=item.StudentExamNoticeID }) |
+           
+        </td>
+    </tr>
+}
+
+</table>

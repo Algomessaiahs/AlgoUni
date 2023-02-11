@@ -1,0 +1,100 @@
+﻿@model IEnumerable<AlgoUni.Models.Result>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExamCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Degree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Department)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartmentCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Semester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subjects)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExamResult)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Grade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CollegeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnivCode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Degree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartmentCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Semester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subjects)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamResult)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CollegeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnivCode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ResultID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ResultID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ResultID })
+        </td>
+    </tr>
+}
+
+</table>

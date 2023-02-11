@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AlgoUni.Models.ExamNotification>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "ExamNotifyCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExamCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Degree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Semester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExamFees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OtherFees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnivCode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Degree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Semester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamFees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OtherFees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnivCode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "ExamNotifyEdit", new { id = item.ExamNotifyID }) |
+            @Html.ActionLink("Details", "ExamNotifyDetails", new { id = item.ExamNotifyID }) |
+            @Html.ActionLink("Delete", "ExamNotifyDelete", new { id = item.ExamNotifyID })
+            @Html.ActionLink("Send", "ExamNotifySend", new { id = item.ExamNotifyID })
+        </td>
+    </tr>
+}
+
+</table>
