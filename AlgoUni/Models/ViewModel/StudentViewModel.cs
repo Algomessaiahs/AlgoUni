@@ -12,6 +12,9 @@ namespace AlgoUni.ViewModel
         public string Department { get; set; }
         public string Degree { get; set; }
         public string Semester { get; set; }
+        //public string ExamCode { get; set; }
+        //public int UnivCode { get; set; }
+        //public int CollegeCode { get; set; }
         public List<StudentMarksViewModel> ListstudentMarksViewModels { get; set; }
     }
 }

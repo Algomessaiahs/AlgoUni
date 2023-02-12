@@ -1,132 +1,195 @@
-﻿@model AlgoUni.Models.Result
+﻿@model AlgoUni.ViewModel.MasterViewModel
 
 @{
     ViewBag.Title = "ResultEdit";
     Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
 }
+<!DOCTYPE html>
+<html>
 
-<h2>Edit</h2>
+<head>
+    <title>
+        How to add table row in jQuery?
+    </title>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js">
+    </script>
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#btnaddtolist").click(function () {
+                AddMarksIntoTable();
+            });
+
+            $("#btnsave").click(function () {
+                AddMarkstoDB();
+            });
+        });
+
+        function AddMarksIntoTable() {
+            if ($("txtsubcode option:selected").val() === "") {
+                alert("Please Select Subject Code.");
+                $("#txtsubcode").focus();
+                return;
+            }
+
+            if ($("txtsub option:selected").val() === "") {
+                alert("Please Select Subject.");
+                $("#txtsub").focus();
+                return;
+            }
+
+            if ($("txtgrade option:selected").val() === "") {
+                alert("Please Enter Grade.");
+                $("#txtgrade").focus();
+                return;
+            }
+
+            var marksTable = $("#tablemarks");
+            var subjectcode = $("#txtsubcode").val();
+            var subjcode = $("txtsubcode option:selected").text();
+            var subject = $("#txtsub").val();
+            var subject2 = $("txtsub option:selected").text();
+            var grade = $("#txtgrade").val();
+
+            var rowvalue = "<tr><td>" + subjectcode + "</td><td>" + subject + "</td><td>" + grade + "</td><td>" + "<input type='button' class='btn btn-danger bg-danger'  name='remove' value='Remove' onclick='remove()' /></td></tr>";
+            $("#tablemarks").append(rowvalue);
+        }
+
+        function AddMarkstoDB() {
+            var objstudentviewmodel = {};
+            var ListstudentMarks = [];
+            var tablemark = $("#tablemarks").find("tr:gt(0)");
+
+            $.each(tablemark,
+                function () {
+                    var studmarks = {};
+                    studmarks.SubjectCode = $(this).find("td:eq(0)").text();;
+                    studmarks.Subject = $(this).find("td:eq(1)").text();
+                    studmarks.Grade = $(this).find("td:eq(2)").text();
+
+                    ListstudentMarks.push(studmarks);
+                });
+
+            objstudentviewmodel.studentID = $("#txtstudid").val();
+            objstudentviewmodel.StudentName = $("#txtName").val();
+            objstudentviewmodel.DepartmentCode = $("#txtdeptcode").val();
+            objstudentviewmodel.Department = $("#txtdept").val();
+            objstudentviewmodel.Semester = $("#txtsem").val();
+            objstudentviewmodel.Degree = $("#txtdegree").val();
+           /* objstudentviewmodel.Examcode = $("txtExamCode").val();*/
+            objstudentviewmodel.ListstudentMarksViewModels = ListstudentMarks;
+
+            $.ajax({
+                async: true,
+                type: 'POST',
+                dataType: 'JSON',
+                contentType: 'application/json; charset = utf-8',
+                data: JSON.stringify(objstudentviewmodel),
+                url: '/University/ResultEdit',
+                success: function (data) {
+                    if (data.success === true) {
+                        alert(data.message);
+                    }
+                },
+                error: function () {
+                    alert("There is some Problem in processing the request.");
+                }
+            });
+        }
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Result</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ResultID)
+    </script>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ExamCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ExamCode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExamCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <h2>ResultEdit</h2>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Degree, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Degree, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Degree, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-dismiss="modal" data-backdrop="static" data-keyboard="false">Student Marks</button>
+    <div class="modal fade" id="myModal" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Student Result</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(expression: model => model.StudentID)
+                                    @Html.TextBoxFor(expression: model => model.StudentID, htmlAttributes: new { @class = "form-control", @id = "txtstudid" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(expression: model => model.StudentName)
+                                    @Html.TextBoxFor(expression: model => model.StudentName, htmlAttributes: new { @class = "form-control", @id = "txtName" })
+                                </div>
+                                @*<div class="form-group col-md-6">
+                                    @Html.LabelFor(expression: model => model.ExamCode)
+                                    @Html.TextBoxFor(expression: model => model.ExamCode, htmlAttributes: new { @class = "form-control", @id = "txtExamCode" })
+                                </div>*@
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(expression: model => model.Degree)
+                                    @Html.TextBoxFor(expression: model => model.Degree, htmlAttributes: new { @class = "form-control", @id = "txtdegree" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(expression: model => model.DepartmentCode)
+                                    @Html.TextBoxFor(expression: model => model.DepartmentCode, htmlAttributes: new { @class = "form-control", @id = "txtdeptcode" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(expression: model => model.Department)
+                                    @Html.TextBoxFor(expression: model => model.Department, htmlAttributes: new { @class = "form-control", @id = "txtdept" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(expression: model => model.Semester)
+                                    @Html.TextBoxFor(expression: model => model.Semester, htmlAttributes: new { @class = "form-control", @id = "txtsem" })
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StudentID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StudentID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StudentID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            <fieldset class="row">
+                                <legend>Grades</legend>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.SubjectCode)
+                                    @Html.DropDownListFor(model => model.SubjectCode, Model.SubjectCode, htmlAttributes: new { @class = "form-control", @id = "txtsubcode" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.Subject)
+                                    @Html.DropDownListFor(model => model.Subject, Model.Subject, htmlAttributes: new { @class = "form-control", @id = "txtsub" })
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.Grade)
+                                    @Html.TextBoxFor(model => model.Grade, htmlAttributes: new { @class = "form-control", @id = "txtgrade" })
+                                </div>
+                                <div>
+                                    <input id="btnaddtolist" style="float: right" type="button" name="addlist" value="Add to List" class="btn btn-danger" />
+                                </div>
+                                <table class="table table-condensed" style="width: 100%" id="tablemarks">
+                                    <thead>
+                                        <tr>
+                                            <th>SubjectCode</th>
+                                            <th>Subject</th>
+                                            <th>Grade</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </fieldset>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StudentName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StudentName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StudentName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnsave">Save</button> &nbsp;
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DepartmentCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DepartmentCode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DepartmentCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Semester, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Semester, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Semester, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Subjects, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Subjects, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Subjects, "", new { @class = "text-danger" })
-            </div>
-        </div>
-       
-  
-        <div class="form-group">
-            @Html.LabelFor(model => model.ExamResult, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ExamResult, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExamResult, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CollegeCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CollegeCode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CollegeCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UnivCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UnivCode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UnivCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                </div>
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "ResultIndex")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+</body>
+</html>

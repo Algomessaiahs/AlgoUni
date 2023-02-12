@@ -1,190 +1,102 @@
-﻿@model AlgoUni.ViewModel.MasterViewModel
+﻿
+@model IEnumerable<AlgoUni.Models.Result>
+
 
 @{
     ViewBag.Title = "ResultIndex";
     Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
 }
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>
-        How to add table row in jQuery?
-    </title>
+<h2>ResultIndex</h2>
 
-    <script src="~/Scripts/jquery-3.4.1.min.js">
-    </script>
-</head>
-<body>
-    <script type="text/javascript">
-        $(document).ready(function () {
+<p>
+    @Html.ActionLink("Create New", "ResultCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExamCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Degree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Department)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartmentCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Semester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CollegeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnivCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalSubjects)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubjectsPassed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubjectsFailed)
+        </th>
+        <th></th>
+    </tr>
 
-            $("#btnaddtolist").click(function () {
-                AddMarksIntoTable();
-            });
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExamCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Degree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartmentCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Semester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CollegeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnivCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalSubjects)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubjectsPassed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubjectsFailed)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "ResultEdit", new { id=item.ResultID }) |
+            @Html.ActionLink("Details", "ResultDetails", new { id=item.ResultID }) |
+            @Html.ActionLink("Delete", "ResultDelete", new { id=item.ResultID })
+        </td>
+    </tr>
+}
 
-            $("#btnsave").click(function () {
-                AddMarkstoDB();
-            });
-        });
-
-        function AddMarksIntoTable() {
-            if ($("txtsubcode option:selected").val() === "") {
-                alert("Please Select Subject Code.");
-                $("#txtsubcode").focus();
-                return;
-            }
-
-            if ($("txtsub option:selected").val() === "") {
-                alert("Please Select Subject.");
-                $("#txtsub").focus();
-                return;
-            }
-
-            if ($("txtgrade option:selected").val() === "") {
-                alert("Please Enter Grade.");
-                $("#txtgrade").focus();
-                return;
-            }
-
-            var marksTable = $("#tablemarks");
-            var subjectcode = $("#txtsubcode").val();
-            var subjcode = $("txtsubcode option:selected").text();
-            var subject = $("#txtsub").val();
-            var subject2 = $("txtsub option:selected").text();
-            var grade = $("#txtgrade").val();
-
-            var rowvalue = "<tr><td>" + subjectcode + "</td><td>" + subject + "</td><td>" + grade + "</td><td>" + "<input type='button' class='btn btn-danger bg-danger'  name='remove' value='Remove' onclick='remove()' /></td></tr>";
-            $("#tablemarks").append(rowvalue);
-        }
-
-        function AddMarkstoDB() {
-            var objstudentviewmodel = {};
-            var ListstudentMarks = [];
-            var tablemark = $("#tablemarks").find("tr:gt(0)");
-
-            $.each(tablemark,
-                function () {
-                    var studmarks = {};
-                    studmarks.SubjectCode = $(this).find("td:eq(0)").text();;
-                    studmarks.Subject = $(this).find("td:eq(1)").text();
-                    studmarks.Grade = $(this).find("td:eq(2)").text();
-
-                    ListstudentMarks.push(studmarks);
-                });
-
-            objstudentviewmodel.studentID = $("#txtstudid").val();
-            objstudentviewmodel.StudentName = $("#txtName").val();
-            objstudentviewmodel.DepartmentCode = $("#txtdeptcode").val();
-            objstudentviewmodel.Department = $("#txtdept").val();
-            objstudentviewmodel.Semester = $("#txtsem").val();
-            objstudentviewmodel.Degree = $("#txtdegree").val();
-            objstudentviewmodel.ListstudentMarksViewModels = ListstudentMarks;
-
-            $.ajax({
-                async: true,
-                type: 'POST',
-                dataType: 'JSON',
-                contentType: 'application/json; charset = utf-8',
-                data: JSON.stringify(objstudentviewmodel),
-                url: '/University/ResultIndex',
-                success: function (data) {
-                    if (data.success === true) {
-                        alert(data.message);
-                    }
-                },
-                error: function () {
-                    alert("There is some Problem in processing the request.");
-                }
-            });
-        }
-
-
-    </script>
-
-    <h2>ResultIndex</h2>
-
-    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal" data-bs-dismiss="modal" data-backdrop="static" data-keyboard="false">Student Marks</button>
-    <div class="modal fade" id="myModal" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Student Result</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <form>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(expression: model => model.StudentID)
-                                    @Html.TextBoxFor(expression: model => model.StudentID, htmlAttributes: new { @class = "form-control", @id = "txtstudid" })
-                                </div>
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(expression: model => model.StudentName)
-                                    @Html.TextBoxFor(expression: model => model.StudentName, htmlAttributes: new { @class = "form-control", @id = "txtName" })
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(expression: model => model.Degree)
-                                    @Html.TextBoxFor(expression: model => model.Degree, htmlAttributes: new { @class = "form-control", @id = "txtdegree" })
-                                </div>
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(expression: model => model.DepartmentCode)
-                                    @Html.TextBoxFor(expression: model => model.DepartmentCode, htmlAttributes: new { @class = "form-control", @id = "txtdeptcode" })
-                                </div>
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(expression: model => model.Department)
-                                    @Html.TextBoxFor(expression: model => model.Department, htmlAttributes: new { @class = "form-control", @id = "txtdept" })
-                                </div>
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(expression: model => model.Semester)
-                                    @Html.TextBoxFor(expression: model => model.Semester, htmlAttributes: new { @class = "form-control", @id = "txtsem" })
-                                </div>
-                            </div>
-
-                            <fieldset class="row">
-                                <legend>Grades</legend>
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(model => model.SubjectCode)
-                                    @Html.DropDownListFor(model => model.SubjectCode, Model.SubjectCode, htmlAttributes: new { @class = "form-control", @id = "txtsubcode" })
-                                </div>
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(model => model.Subject)
-                                    @Html.DropDownListFor(model => model.Subject, Model.Subject, htmlAttributes: new { @class = "form-control", @id = "txtsub" })
-                                </div>
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(model => model.Grade)
-                                    @Html.TextBoxFor(model => model.Grade, htmlAttributes: new { @class = "form-control", @id = "txtgrade" })
-                                </div>
-                                <div>
-                                    <input id="btnaddtolist" style="float: right" type="button" name="addlist" value="Add to List" class="btn btn-danger" />
-                                </div>
-                                <table class="table table-condensed" style="width: 100%" id="tablemarks">
-                                    <thead>
-                                        <tr>
-                                            <th>SubjectCode</th>
-                                            <th>Subject</th>
-                                            <th>Grade</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </fieldset>
-
-                        </form>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btnsave">Save</button> &nbsp;
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-</body>
-</html>
+</table>

@@ -14,8 +14,8 @@
         <EntityTypeShape EntityType="UniversityRegisterModel.ExamNotification" Width="1.5" PointX="7" PointY="0.75" />
         <EntityTypeShape EntityType="UniversityRegisterModel.CollegeExamNotice" Width="1.5" PointX="7.25" PointY="3.875" />
         <EntityTypeShape EntityType="UniversityRegisterModel.StudentExamNotice" Width="1.5" PointX="9.25" PointY="0.75" />
-        <EntityTypeShape EntityType="UniversityRegisterModel.Result" Width="1.5" PointX="11.375" PointY="0.875" />
-        <EntityTypeShape EntityType="UniversityRegisterModel.MARK" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.Result" Width="1.5" PointX="13" PointY="0.75" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.MARK" Width="1.5" PointX="11.125" PointY="1.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -66,11 +66,11 @@
           <Property Name="Department" Type="varchar" MaxLength="255" />
           <Property Name="DepartmentCode" Type="int" />
           <Property Name="Semester" Type="varchar" MaxLength="255" />
-          <Property Name="Subjects" Type="varchar" MaxLength="255" />
-          <Property Name="ExamResult" Type="varchar" MaxLength="255" />
-          <Property Name="Grade" Type="varchar" MaxLength="255" />
           <Property Name="CollegeCode" Type="int" />
           <Property Name="UnivCode" Type="int" />
+          <Property Name="TotalSubjects" Type="int" />
+          <Property Name="SubjectsPassed" Type="int" />
+          <Property Name="SubjectsFailed" Type="int" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -327,11 +327,11 @@
           <Property Name="Department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="DepartmentCode" Type="Int32" />
           <Property Name="Semester" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Subjects" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ExamResult" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Grade" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CollegeCode" Type="Int32" />
           <Property Name="UnivCode" Type="Int32" />
+          <Property Name="TotalSubjects" Type="Int32" />
+          <Property Name="SubjectsPassed" Type="Int32" />
+          <Property Name="SubjectsFailed" Type="Int32" />
         </EntityType>
         <EntityType Name="MARK">
           <Key>
@@ -470,11 +470,11 @@
           <EntitySetMapping Name="Results">
             <EntityTypeMapping TypeName="UniversityRegisterModel.Result">
               <MappingFragment StoreEntitySet="Result">
+                <ScalarProperty Name="SubjectsFailed" ColumnName="SubjectsFailed" />
+                <ScalarProperty Name="SubjectsPassed" ColumnName="SubjectsPassed" />
+                <ScalarProperty Name="TotalSubjects" ColumnName="TotalSubjects" />
                 <ScalarProperty Name="UnivCode" ColumnName="UnivCode" />
                 <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
-                <ScalarProperty Name="Grade" ColumnName="Grade" />
-                <ScalarProperty Name="ExamResult" ColumnName="ExamResult" />
-                <ScalarProperty Name="Subjects" ColumnName="Subjects" />
                 <ScalarProperty Name="Semester" ColumnName="Semester" />
                 <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
                 <ScalarProperty Name="Department" ColumnName="Department" />

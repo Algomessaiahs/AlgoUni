@@ -149,14 +149,14 @@
     <Compile Include="Models\MARK.cs">
       <DependentUpon>UniversityRegister.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Result.cs">
+      <DependentUpon>UniversityRegister.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModel\MasterViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentMarksViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentViewModel.cs" />
     <Compile Include="Models\Membership.cs" />
     <Compile Include="Models\Model.cs" />
-    <Compile Include="Models\Result.cs">
-      <DependentUpon>UniversityRegister.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Role.cs">
       <DependentUpon>UniversityRegister.tt</DependentUpon>
     </Compile>
@@ -314,17 +314,14 @@
     <Content Include="Views\Student\StudentNotifyIndex.cshtml" />
     <Content Include="Views\Student\StudentNotifyEdit.cshtml" />
     <Content Include="Views\Student\StudentNotifyDetails.cshtml" />
-    <Content Include="Views\University\ResultCreate.cshtml" />
-    <Content Include="Views\University\ResultDelete.cshtml" />
-    <Content Include="Views\University\ResultDetails.cshtml" />
     <Content Include="Views\University\ResultEdit.cshtml" />
-    <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\Shared\_StudentLayout.cshtml" />
+    <Content Include="Views\Shared\CollegeLayout.cshtml" />
     <Content Include="Views\University\ResultIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ExamNotifications\" />
-    <Folder Include="Views\Result\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

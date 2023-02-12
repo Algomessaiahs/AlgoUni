@@ -22,10 +22,10 @@ namespace AlgoUni.Models
         public string Department { get; set; }
         public Nullable<int> DepartmentCode { get; set; }
         public string Semester { get; set; }
-        public string Subjects { get; set; }
-        public string ExamResult { get; set; }
-        public string Grade { get; set; }
         public Nullable<int> CollegeCode { get; set; }
         public Nullable<int> UnivCode { get; set; }
+        public Nullable<int> TotalSubjects { get; set; }
+        public Nullable<int> SubjectsPassed { get; set; }
+        public Nullable<int> SubjectsFailed { get; set; }
     }
 }

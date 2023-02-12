@@ -9,6 +9,7 @@ using System.Web.Security;
 using System.Data.Entity;
 using AlgoUni.ViewModel;
 using System.Runtime.InteropServices;
+using System.Dynamic;
 
 namespace AlgoUni.Controllers
 {
@@ -314,46 +315,17 @@ namespace AlgoUni.Controllers
             }
            return RedirectToAction("ExamNotifyIndex");
         }
-public ActionResult Result()
+        public ActionResult Result()
         {
             return RedirectToAction("ResultIndex");
         }         // GET: Results
-        public ActionResult ResultIndex()
+      
+      
+        public ActionResult ResultIndex()
         {
-            MasterViewModel obj = new MasterViewModel(); obj.SubjectCode = (from objects in db.Subjects
-                                                                            select new SelectListItem()
-                                                                            {
-                                                                                Text = objects.SubjectCode,
-                                                                                Value = objects.SubjectCode
-                                                                            }
-            ).ToList();
-            obj.Subject = (from objects in db.Subjects
-                           select new SelectListItem()
-                           {
-                               Text = objects.Subjects,
-                               Value = objects.Subjects
-                           }
-            ).ToList(); return View(obj);
-        }
-        [HttpPost]
-        public ActionResult ResultIndex(StudentViewModel objstud, Result result)
-        {
-            result.StudentID = objstud.studentID;
-            result.DepartmentCode = Convert.ToInt32(objstud.DepartmentCode);
-            result.Department = objstud.Department; db.Results.Add(result);
-            db.SaveChanges(); foreach (var item in objstud.ListstudentMarksViewModels)
-            {
-                MARK data2 = new MARK()
-                {
-                    StudentID = objstud.studentID,
-                    SubjectCode = item.SubjectCode,
-                    Subject = item.Subject,
-                    Grade = item.Grade
-                };
-                db.MARKS.Add(data2);
-                db.SaveChanges();
-            }
-            return Json(data: new { message = "Data Successfully Added.", status = true }, JsonRequestBehavior.AllowGet);
+            //dynamic model2 = new ExpandoObject();
+            //model2.
+            return View(db.Results.ToList());
         }
 
 
@@ -383,7 +355,7 @@ public ActionResult Result()
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ResultCreate([Bind(Include = "ResultID,ExamCode,Degree,StudentID,StudentName,Department,DepartmentCode,Semester,Subjects,ExamResult,Grade,CollegeCode,UnivCode")] Result result)
+        public ActionResult ResultCreate( Result result)
         {
             if (ModelState.IsValid)
             {
@@ -398,36 +370,47 @@ public ActionResult Result()
         // GET: Results/Edit/5
         public ActionResult ResultEdit(int? id)
         {
-
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            
-            Result result = db.Results.Find(id);
-            //var data = db.Subjects.Select(x => x.Semester == result.Semester && x.Department_Code == result.DepartmentCode).ToList();
-            //Subject subject = new Subject();
-            //subject.SubjectCode = (for sub in db.Subjects
-            //    select new subject()
+            //if (id == null)
             //{
-
-            //}).ToList();
-            //using (var context = new UniversityRegister())
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Result result = db.Results.Find(id);
+            //if (result == null)
             //{
-            //    ViewBag.res = (from SubjectCode in context.Subjects
-            //               join
-            //               subject in context.Results on SubjectCode.Semester equals subject.Semester
-            //               where subject.Department == SubjectCode.Department
-            //               select subject.Subjects).ToList();
-
-            //    return View(ViewBag.res);
+            //    return HttpNotFound();
             //}
 
-            if (result == null)
-            {
-                return HttpNotFound();
-            }
-            return View(result);
+            MasterViewModel obj = new MasterViewModel();
+            obj.SubjectCode = (from objects in db.Subjects
+                               //where objects.Semester == result.Semester && objects.Department_Code==result.DepartmentCode
+                               select new SelectListItem()
+                               {
+                                   Text = objects.SubjectCode,
+                                   Value = objects.SubjectCode
+                               }
+            ).ToList();
+            obj.Subject = (from objects in db.Subjects
+                           //where objects.Semester == result.Semester && objects.Department_Code == result.DepartmentCode
+                           select new SelectListItem()
+                           {
+                               Text = objects.Subjects,
+                               Value = objects.Subjects
+                           }
+            ).ToList();
+
+            //obj.StudentName = result.StudentName;
+            //obj.StudentID=result.StudentID;
+            //obj.Department = result.Department;
+            //obj.Semester = result.Semester;
+            //obj.DepartmentCode = result.DepartmentCode.ToString();
+            //obj.Degree = result.Degree;
+            //obj.ExamCode = result.ExamCode;
+           
+            return View(obj);
+            
+
+
+           
         }
 
         // POST: Results/Edit/5
@@ -435,42 +418,68 @@ public ActionResult Result()
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ResultEdit([Bind(Include = "ResultID,ExamCode,Degree,StudentID,StudentName,Department,DepartmentCode,Semester,Subjects,ExamResult,Grade,CollegeCode,UnivCode")] Result result)
+        public ActionResult ResultEdit(Result result, StudentViewModel objstud)
         {
-            if (ModelState.IsValid)
+            //result.StudentID = objstud.studentID;
+            //result.DepartmentCode = Convert.ToInt32(objstud.DepartmentCode);
+            //result.Department = objstud.Department;
+            //db.Results.Add(result);
+            //db.SaveChanges();
+            foreach (var item in objstud.ListstudentMarksViewModels)
             {
-                db.Entry(result).State = EntityState.Modified;
+                MARK data2 = new MARK()
+                {
+                    StudentID = objstud.studentID,
+                    SubjectCode = item.SubjectCode,
+                    Subject = item.Subject,
+                    Grade = item.Grade,
+                    //Degree = objstud.Degree,
+                    //StudentName = objstud.StudentName,
+                    //Department = objstud.Department,
+                    //DepartmentCode=Convert.ToInt32(objstud.DepartmentCode),
+                    //Semester=objstud.Semester,
+                    //ExamCode=objstud.ExamCode
+                };
+
+                db.MARKS.Add(data2);
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(result);
+            return Json(data: new { message = "Data Successfully Added.", status = true }, JsonRequestBehavior.AllowGet);
+
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(result).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            //return View(result);
         }
 
         // GET: Results/Delete/5
-        public ActionResult ResultDelete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Result result = db.Results.Find(id);
-            if (result == null)
-            {
-                return HttpNotFound();
-            }
-            return View(result);
-        }
+        //public ActionResult ResultDelete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Result result = db.Results.Find(id);
+        //    if (result == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(result);
+        //}
 
-        // POST: Results/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult ResultDeleteConfirmed(int id)
-        {
-            Result result = db.Results.Find(id);
-            db.Results.Remove(result);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Results/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ResultDeleteConfirmed(int id)
+        //{
+        //    Result result = db.Results.Find(id);
+        //    db.Results.Remove(result);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
         protected override void Dispose(bool disposing)
         {
             if (disposing)
