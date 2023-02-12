@@ -1,13 +1,13 @@
-﻿@{
-    var session = (AlgoUni.Models.UniversityRegister)Session["model"];
-    //if (session == null)
-    //{
-    //    Response.Redirect("~/University/Login");
-    //}
+﻿@*@{
+    var session = (AlgoUni.Models.Membership)Session["model"];
+    if (session == null)
+    {
+        Response.Redirect("~/University/Login");
+    }
     //if (string.Compare(session?. , "Company",true)==0)
     //{
     //    Response.Redirect("~/CompanyRegister/Login");
-}
+}*@
 
     <!DOCTYPE html>
     <html lang="en">
@@ -20,15 +20,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
+        <title>Dashboard</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="~/Content/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed fixed-top">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="~/University/list">Dashboard</a>
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-black">
             <!-- Sidebar Toggle-->
             <button class="navbar-toggler" id="sidebarToggle" href="#!" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
 
@@ -50,32 +48,8 @@
                 <div class="input-group py-xl-5 w-100 m-md-1 p-4">
                     @*<a id="home-tab2" style="text-decoration:none;" class="nav-link " href="@Url.Action("Index", "Home")"> Home</a>*@
                     @*<a id="home-tab2" class="nav-link " href="@Url.Action("Login", "University")">Log In</a>
-        <a id="home-tab2" class="nav-link " href="@Url.Action("Register", "University")">Register</*@a>
-                    @*@if(User.Identity.IsAuthenticated)
-        {
-
-            <a id="home-tab2" class="nav-link ">Hi,  </a>
-            <a id="home-tab2" class="nav-link " href="@Url.Action("LogOut", "University")">Log Out</a>
-        }
-        else
-        {
-            <a id="home-tab2" class="nav-link" href="@Url.Action("Login","University")">LogIn</a>
-        }*@
-                    <ul>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li>@Html.ActionLink("Logout", "Logout", "University")</li>
-                        }
-                        else
-                        {
-                            <li>@Html.ActionLink("Login", "Login", "University")</li>
-                            @*<li>@Html.ActionLink("SignUp", "Signup", "UserAccount")</li>*@
-                        }
-                    </ul>
-                    <a id="home-tab2" class="nav-link " href="@Url.Action("Result", "University")">Result</a>
-                    <a id="home-tab2" class="nav-link " href="@Url.Action("ExamNotify", "University")">ExamNotify</a>
-                    <a id="home-tab2" class="nav-link " href="@Url.Action("Student", "College")">Student</a>
-                    <a id="home-tab2" class="nav-link " href="@Url.Action("College", "University")">College</a>
+                        <a id="home-tab2" class="nav-link " href="@Url.Action("Register", "University")">Register</*@a>
+                    <a id="home-tab2" class="nav-link " href="@Url.Action("LogOut", "University")">Log Out</a>
                     <a id="home-tab2" class="nav-link disabled" href="@Url.Action("Register", "University")">Research</a>
                     <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
@@ -88,9 +62,9 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
+                            <a class="nav-link" href="~/CollegeDetails/Index">
+                                @*<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>*@
+                                College Register
                             </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -101,7 +75,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     @*<a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                        <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>*@
+                        <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>*@
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -116,12 +90,12 @@
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     @*<div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                            <nav class="sb-sidenav-menu-nested nav">
-                                                <a class="nav-link" href="login.html">Login</a>
-                                                <a class="nav-link" href="register.html">Register</a>
-                                                <a class="nav-link" href="password.html">Forgot Password</a>
-                                            </nav>
-                                        </div>*@
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="login.html">Login</a>
+                                <a class="nav-link" href="register.html">Register</a>
+                                <a class="nav-link" href="password.html">Forgot Password</a>
+                            </nav>
+                        </div>*@
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
                                         Error
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -137,15 +111,16 @@
                             </div>
                             <div class="sb-sidenav-menu-heading">Addons</div>
                             @*<a class="nav-link" href="charts.html">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                    Charts
-                                </a>
-                                <a class="nav-link" href="tables.html">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                    Tables
-                                </a>*@
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                    Charts
+                </a>
+                <a class="nav-link" href="tables.html">
+                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                    Tables
+                </a>*@
                         </div>
                     </div>
+                    
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         Dashboard
@@ -167,7 +142,7 @@
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                <p>&copy; @DateTime.Now.Year - Algo Messaiahs 2023</p>
             </footer>
         </div>
 
