@@ -146,6 +146,12 @@
     <Compile Include="Models\ExamNotification.cs">
       <DependentUpon>UniversityRegister.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MARK.cs">
+      <DependentUpon>UniversityRegister.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModel\MasterViewModel.cs" />
+    <Compile Include="Models\ViewModel\StudentMarksViewModel.cs" />
+    <Compile Include="Models\ViewModel\StudentViewModel.cs" />
     <Compile Include="Models\Membership.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Result.cs">

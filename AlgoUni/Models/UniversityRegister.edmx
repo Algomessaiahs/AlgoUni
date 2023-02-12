@@ -44,6 +44,16 @@
           <Property Name="OtherFees" Type="int" />
           <Property Name="UnivCode" Type="int" />
         </EntityType>
+        <EntityType Name="MARKS">
+          <Key>
+            <PropertyRef Name="SMarksID" />
+          </Key>
+          <Property Name="SMarksID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="varchar" MaxLength="255" />
+          <Property Name="SubjectCode" Type="varchar" MaxLength="255" />
+          <Property Name="Subject" Type="varchar" MaxLength="255" />
+          <Property Name="Grade" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Result">
           <Key>
             <PropertyRef Name="ResultID" />
@@ -149,6 +159,7 @@
           <EntitySet Name="CollegeDetails" EntityType="Self.CollegeDetails" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="CollegeExamNotice" EntityType="Self.CollegeExamNotice" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="ExamNotification" EntityType="Self.ExamNotification" Schema="UNIVERSITY" store:Type="Tables" />
+          <EntitySet Name="MARKS" EntityType="Self.MARKS" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="Result" EntityType="Self.Result" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="UNIVERSITY" store:Type="Tables" />
           <EntitySet Name="StudentDetails" EntityType="Self.StudentDetails" Schema="UNIVERSITY" store:Type="Tables" />
@@ -245,6 +256,7 @@
           <EntitySet Name="CollegeExamNotices" EntityType="UniversityRegisterModel.CollegeExamNotice" />
           <EntitySet Name="StudentExamNotices" EntityType="UniversityRegisterModel.StudentExamNotice" />
           <EntitySet Name="Results" EntityType="UniversityRegisterModel.Result" />
+          <EntitySet Name="MARKS" EntityType="UniversityRegisterModel.MARK" />
         </EntityContainer>
         <Association Name="Fk_Key_UserID">
           <End Type="UniversityRegisterModel.UniversityDetail" Role="UniversityDetail" Multiplicity="0..1" />
@@ -320,6 +332,16 @@
           <Property Name="Grade" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CollegeCode" Type="Int32" />
           <Property Name="UnivCode" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MARK">
+          <Key>
+            <PropertyRef Name="SMarksID" />
+          </Key>
+          <Property Name="SMarksID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SubjectCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Grade" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -461,6 +483,17 @@
                 <ScalarProperty Name="Degree" ColumnName="Degree" />
                 <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
                 <ScalarProperty Name="ResultID" ColumnName="ResultID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARKS">
+            <EntityTypeMapping TypeName="UniversityRegisterModel.MARK">
+              <MappingFragment StoreEntitySet="MARKS">
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="SMarksID" ColumnName="SMarksID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

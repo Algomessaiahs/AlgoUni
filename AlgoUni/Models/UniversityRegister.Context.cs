@@ -34,5 +34,6 @@ namespace AlgoUni.Models
         public virtual DbSet<CollegeExamNotice> CollegeExamNotices { get; set; }
         public virtual DbSet<StudentExamNotice> StudentExamNotices { get; set; }
         public virtual DbSet<Result> Results { get; set; }
+        public virtual DbSet<MARK> MARKS { get; set; }
     }
 }

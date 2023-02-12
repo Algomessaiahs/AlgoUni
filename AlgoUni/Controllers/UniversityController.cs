@@ -7,6 +7,8 @@ using AlgoUni.Models;
 using System.Net;
 using System.Web.Security;
 using System.Data.Entity;
+using AlgoUni.ViewModel;
+using System.Runtime.InteropServices;
 
 namespace AlgoUni.Controllers
 {
@@ -312,17 +314,48 @@ namespace AlgoUni.Controllers
             }
            return RedirectToAction("ExamNotifyIndex");
         }
-
-        public ActionResult Result()
+public ActionResult Result()
         {
             return RedirectToAction("ResultIndex");
+        }         // GET: Results
+        public ActionResult ResultIndex()
+        {
+            MasterViewModel obj = new MasterViewModel(); obj.SubjectCode = (from objects in db.Subjects
+                                                                            select new SelectListItem()
+                                                                            {
+                                                                                Text = objects.SubjectCode,
+                                                                                Value = objects.SubjectCode
+                                                                            }
+            ).ToList();
+            obj.Subject = (from objects in db.Subjects
+                           select new SelectListItem()
+                           {
+                               Text = objects.Subjects,
+                               Value = objects.Subjects
+                           }
+            ).ToList(); return View(obj);
+        }
+        [HttpPost]
+        public ActionResult ResultIndex(StudentViewModel objstud, Result result)
+        {
+            result.StudentID = objstud.studentID;
+            result.DepartmentCode = Convert.ToInt32(objstud.DepartmentCode);
+            result.Department = objstud.Department; db.Results.Add(result);
+            db.SaveChanges(); foreach (var item in objstud.ListstudentMarksViewModels)
+            {
+                MARK data2 = new MARK()
+                {
+                    StudentID = objstud.studentID,
+                    SubjectCode = item.SubjectCode,
+                    Subject = item.Subject,
+                    Grade = item.Grade
+                };
+                db.MARKS.Add(data2);
+                db.SaveChanges();
+            }
+            return Json(data: new { message = "Data Successfully Added.", status = true }, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Results
-        public ActionResult ResultIndex()
-        {
-            return View(db.Results.ToList());
-        }
 
         // GET: Results/Details/5
         public ActionResult ResultDetails(int? id)
@@ -365,11 +398,31 @@ namespace AlgoUni.Controllers
         // GET: Results/Edit/5
         public ActionResult ResultEdit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
             Result result = db.Results.Find(id);
+            //var data = db.Subjects.Select(x => x.Semester == result.Semester && x.Department_Code == result.DepartmentCode).ToList();
+            //Subject subject = new Subject();
+            //subject.SubjectCode = (for sub in db.Subjects
+            //    select new subject()
+            //{
+
+            //}).ToList();
+            //using (var context = new UniversityRegister())
+            //{
+            //    ViewBag.res = (from SubjectCode in context.Subjects
+            //               join
+            //               subject in context.Results on SubjectCode.Semester equals subject.Semester
+            //               where subject.Department == SubjectCode.Department
+            //               select subject.Subjects).ToList();
+
+            //    return View(ViewBag.res);
+            //}
+
             if (result == null)
             {
                 return HttpNotFound();
