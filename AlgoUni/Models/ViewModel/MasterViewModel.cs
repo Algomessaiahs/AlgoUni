@@ -10,8 +10,14 @@ using System.Web.Mvc; namespace AlgoUni.ViewModel
         public string StudentName { get; set; }
         public string Department { get; set; }
         public string Degree { get; set; }
-        public string ExamCode; public string DepartmentCode { get; set; }
-        public string Semester; public IEnumerable<SelectListItem> SubjectCode; public IEnumerable<SelectListItem> Subject; public string Grade;
+        public string DepartmentCode { get; set; }
+
+        public string Semester { get; set; } 
+        
+        public IEnumerable<SelectListItem> SubjectCode; 
+        
+        public IEnumerable<SelectListItem> Subject; 
+        public string Grade { get; set; }
     }
 }
 

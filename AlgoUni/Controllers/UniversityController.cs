@@ -314,19 +314,21 @@ namespace AlgoUni.Controllers
             }
            return RedirectToAction("ExamNotifyIndex");
         }
-public ActionResult Result()
+        public ActionResult Result()
         {
             return RedirectToAction("ResultIndex");
         }         // GET: Results
         public ActionResult ResultIndex()
         {
-            MasterViewModel obj = new MasterViewModel(); obj.SubjectCode = (from objects in db.Subjects
+            MasterViewModel obj = new MasterViewModel(); 
+            obj.SubjectCode = (from objects in db.Subjects
                                                                             select new SelectListItem()
                                                                             {
                                                                                 Text = objects.SubjectCode,
                                                                                 Value = objects.SubjectCode
                                                                             }
             ).ToList();
+
             obj.Subject = (from objects in db.Subjects
                            select new SelectListItem()
                            {
@@ -335,13 +337,16 @@ public ActionResult Result()
                            }
             ).ToList(); return View(obj);
         }
+
         [HttpPost]
         public ActionResult ResultIndex(StudentViewModel objstud, Result result)
         {
-            result.StudentID = objstud.studentID;
-            result.DepartmentCode = Convert.ToInt32(objstud.DepartmentCode);
-            result.Department = objstud.Department; db.Results.Add(result);
-            db.SaveChanges(); foreach (var item in objstud.ListstudentMarksViewModels)
+            //result.StudentID = objstud.studentID;
+            //result.DepartmentCode = Convert.ToInt32(objstud.DepartmentCode);
+            //result.Department = objstud.Department; db.Results.Add(result);
+            //db.SaveChanges(); 
+
+            foreach (var item in objstud.ListstudentMarksViewModels)
             {
                 MARK data2 = new MARK()
                 {
