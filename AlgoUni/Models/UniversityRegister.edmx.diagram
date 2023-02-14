@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="90632bf368794c9fafb4d5fef53551d0" Name="Diagram1">
-        <EntityTypeShape EntityType="UniversityRegisterModel.Role" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniversityRegisterModel.StudentDetail" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniversityRegisterModel.Subject" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniversityRegisterModel.UniversityDetail" Width="1.5" PointX="4.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniversityRegisterModel.CollegeDetail" Width="1.5" PointX="0.625" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.Role" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.StudentDetail" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.Subject" Width="1.5" PointX="4.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.UniversityDetail" Width="1.5" PointX="4.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.CollegeDetail" Width="1.5" PointX="0.625" PointY="3" IsExpanded="true" />
         <AssociationConnector Association="UniversityRegisterModel.Fk_Key_UserID" />
-        <EntityTypeShape EntityType="UniversityRegisterModel.ExamNotification" Width="1.5" PointX="7" PointY="0.75" />
-        <EntityTypeShape EntityType="UniversityRegisterModel.CollegeExamNotice" Width="1.5" PointX="7.25" PointY="3.875" />
-        <EntityTypeShape EntityType="UniversityRegisterModel.StudentExamNotice" Width="1.5" PointX="9.25" PointY="0.75" />
-        <EntityTypeShape EntityType="UniversityRegisterModel.Result" Width="1.5" PointX="11.375" PointY="0.875" />
-        <EntityTypeShape EntityType="UniversityRegisterModel.MARK" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.ExamNotification" Width="1.5" PointX="7" PointY="0.5" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.CollegeExamNotice" Width="1.5" PointX="7.25" PointY="3.625" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.StudentExamNotice" Width="1.5" PointX="9.25" PointY="0.5" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.Result" Width="1.5" PointX="11.375" PointY="0.625" />
+        <EntityTypeShape EntityType="UniversityRegisterModel.MARK" Width="1.5" PointX="0.75" PointY="6.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

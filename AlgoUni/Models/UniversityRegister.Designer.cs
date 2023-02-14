@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\rajeswari.n\Documents\AlgoUni2\AlgoUni\Models\UniversityRegister.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\rajeswari.n\Documents\ASP.net projects\Techathon Round 2\AlgoUni2.0.0.0\AlgoUni2\AlgoUni\Models\UniversityRegister.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
